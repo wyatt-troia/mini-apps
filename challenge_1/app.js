@@ -10,13 +10,18 @@ var state = {
   board: [["", "", ""], ["", "", ""], ["", "", ""]],
   numTurns: 0,
   reset: function(winner) {
-    this.upNext = winner;
+    this.upNext = winner || "X";
     this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
     this.numTurns = 0;
     var cells = document.querySelectorAll("td");
     for (var i = 0; i < cells.length; i++) {
       cells[i].innerHTML = "";
     }
+  },
+  winner: "",
+  winCounts: {
+    X: 0,
+    O: 0
   }
 };
 
@@ -32,25 +37,36 @@ html_board.addEventListener("click", e => {
     event.target.innerHTML = state.upNext;
     state.board[rowIndex][colIndex] = state.upNext;
     if (hasWon("X")) {
-      alert(`Player X wins!`);
-      state.reset("X");
+      displayWinNotification("X");
+      state.winner = "X";
+      state.winCounts.X++;
+      updateWinCountDiv();
       return;
     }
     if (hasWon("O")) {
-      alert(`Player O wins!`);
-      state.reset("O");
+      displayWinNotification("O");
+      state.winner = "O";
+      state.winCounts.O++;
+      updateWinCountDiv();
       return;
     }
     state.numTurns++;
     if (state.numTurns === 9) {
-      alert("Tie!");
-      state.reset("X");
+      displayTieNotification();
       return;
     }
     state.advanceTurn.call(state);
   }
   e.stopPropagation();
 });
+
+// display win count
+function updateWinCountDiv() {
+  let winCountDiv = document.getElementById("winCount");
+  winCountDiv.innerHTML = `<b>Wins:</b><br>
+  X: ${state.winCounts.X}<br>
+  O: ${state.winCounts.O}`;
+}
 
 function hasWon(player) {
   let board = state.board;
@@ -88,8 +104,22 @@ function hasWon(player) {
   return false;
 }
 
+// display win notification
+function displayWinNotification(winner) {
+  let div = document.getElementById("result_notification");
+  div.innerHTML = `Player ${winner} wins!`;
+}
+
+// display tie notification
+function displayTieNotification() {
+  let div = document.getElementById("result_notification");
+  div.innerHTML = `Tie!`;
+}
+
 // reset game when reset button is clicked
 let resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", event => {
   state.reset();
+  let div = document.getElementById("result_notification");
+  div.innerHTML = ``;
 });

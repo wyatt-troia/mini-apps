@@ -29,6 +29,22 @@ var state = {
   }
 };
 
+var view = {};
+view.updateWinCountDiv = function() {
+  let winCountDiv = document.getElementById("winCount");
+  winCountDiv.innerHTML = `<b>Wins:</b><br>
+  X - ${state.playerNames.X}: ${state.winCounts.X}<br>
+  O - ${state.playerNames.O}: ${state.winCounts.O}`;
+};
+view.displayWinNotification = function(winner) {
+  let div = document.getElementById("result_notification");
+  div.innerHTML = `${state.playerNames[winner]} wins!`;
+};
+view.displayTieNotification = function() {
+  let div = document.getElementById("result_notification");
+  div.innerHTML = `Tie!`;
+};
+
 // add click handlers to grid
 let html_board = document.getElementById("board");
 html_board.addEventListener("click", e => {
@@ -47,22 +63,22 @@ html_board.addEventListener("click", e => {
 
     // check for and handle win or tie event
     if (hasWon("X")) {
-      displayWinNotification("X");
+      view.displayWinNotification("X");
       state.winner = "X";
       state.winCounts.X++;
-      updateWinCountDiv();
+      view.updateWinCountDiv();
       return;
     }
     if (hasWon("O")) {
-      displayWinNotification("O");
+      view.displayWinNotification("O");
       state.winner = "O";
       state.winCounts.O++;
-      updateWinCountDiv();
+      view.updateWinCountDiv();
       return;
     }
     state.numTurns++;
     if (state.numTurns === 9) {
-      displayTieNotification();
+      view.displayTieNotification();
       return;
     }
 
@@ -73,15 +89,7 @@ html_board.addEventListener("click", e => {
 });
 
 // update page with player names
-updateWinCountDiv();
-
-// display win count
-function updateWinCountDiv() {
-  let winCountDiv = document.getElementById("winCount");
-  winCountDiv.innerHTML = `<b>Wins:</b><br>
-  X - ${state.playerNames.X}: ${state.winCounts.X}<br>
-  O - ${state.playerNames.O}: ${state.winCounts.O}`;
-}
+view.updateWinCountDiv();
 
 function hasWon(player) {
   let board = state.board;
@@ -117,20 +125,6 @@ function hasWon(player) {
   )
     return true;
   return false;
-}
-
-let view = {};
-
-// display win notification
-function displayWinNotification(winner) {
-  let div = document.getElementById("result_notification");
-  div.innerHTML = `${state.playerNames[winner]} wins!`;
-}
-
-// display tie notification
-function displayTieNotification() {
-  let div = document.getElementById("result_notification");
-  div.innerHTML = `Tie!`;
 }
 
 // reset game when reset button is clicked

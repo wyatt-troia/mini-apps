@@ -1,4 +1,5 @@
 var state = {
+  activeGame: true,
   upNext: "X",
   advanceTurn: function() {
     if (this.upNext === "X") {
@@ -13,13 +14,23 @@ var state = {
     X: prompt("Player X name:"),
     O: prompt("Player O name:")
   },
+  playerColors: {
+    X: "DarkRed",
+    O: "black"
+  },
+  playerBackgroundColors: {
+    X: "LightCoral",
+    O: "DarkGray"
+  },
   reset: function(winner) {
     this.upNext = winner || "X";
     this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
     this.numTurns = 0;
+    this.activeGame = true;
     var cells = document.querySelectorAll("td");
     for (var i = 0; i < cells.length; i++) {
       cells[i].innerHTML = "";
+      cells[i].style.backgroundColor = "white";
     }
   },
   winner: "",
@@ -38,17 +49,20 @@ view.updateWinCountDiv = function() {
 };
 view.displayWinNotification = function(winner) {
   let div = document.getElementById("result_notification");
-  div.innerHTML = `${state.playerNames[winner]} wins!`;
+  div.innerHTML = `<b>${state.playerNames[winner]} wins!</b>`;
+  div.style.fontSize = "3rem";
+  div.style.color = state.playerColors[state.upNext];
 };
 view.displayTieNotification = function() {
   let div = document.getElementById("result_notification");
-  div.innerHTML = `Tie!`;
+  div.innerHTML = `<b>Tie!</b>`;
+  div.style.fontSize = "3rem";
 };
 
 // add click handlers to grid
 let html_board = document.getElementById("board");
 html_board.addEventListener("click", e => {
-  if (e.target !== e.currentTarget) {
+  if (e.target !== e.currentTarget && state.activeGame) {
     // get col and row index of clicked cell
     var rows = Array.from(document.getElementsByTagName("tr"));
     var rowIndex = rows.indexOf(event.target.parentNode);
@@ -56,6 +70,9 @@ html_board.addEventListener("click", e => {
     var colIndex = cols.indexOf(event.target);
 
     // update text in cell
+    event.target.style.color = state.playerColors[state.upNext];
+    event.target.style.backgroundColor =
+      state.playerBackgroundColors[state.upNext];
     event.target.innerHTML = state.upNext;
 
     // update state model of board
@@ -66,6 +83,7 @@ html_board.addEventListener("click", e => {
       view.displayWinNotification("X");
       state.winner = "X";
       state.winCounts.X++;
+      state.activeGame = false;
       view.updateWinCountDiv();
       return;
     }
@@ -73,12 +91,14 @@ html_board.addEventListener("click", e => {
       view.displayWinNotification("O");
       state.winner = "O";
       state.winCounts.O++;
+      state.activeGame = false;
       view.updateWinCountDiv();
       return;
     }
     state.numTurns++;
     if (state.numTurns === 9) {
       view.displayTieNotification();
+      state.activeGame = false;
       return;
     }
 

@@ -1,0 +1,26 @@
+#container {
+  text-align: center;
+  width: 25%;
+}
+table {
+  border-collapse: collapse;
+  border: 3px solid black;
+  margin: 0 auto;
+}
+td {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+  border: 3px solid black;
+}
+button {
+  font-size: 1rem;
+}
+#winCount {
+  font-size: 1.5rem;
+}
+#resultNotification {
+  font-size: 2rem;
+}

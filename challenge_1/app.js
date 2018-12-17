@@ -7,7 +7,8 @@ var state = {
       this.upNext = "X";
     }
   },
-  board: [["", "", ""], ["", "", ""], ["", "", ""]]
+  board: [["", "", ""], ["", "", ""], ["", "", ""]],
+  numTurns: 0
 };
 
 // add click handlers to board cells
@@ -22,12 +23,10 @@ for (var i = 0; i < cells.length; i++) {
     console.log(`clicked row ${rowIndex}, col ${colIndex}`);
     event.target.innerHTML = state.upNext;
     state.board[rowIndex][colIndex] = state.upNext;
-    if (hasWon("X")) {
-      alert(`Player X wins!`);
-    }
-    if (hasWon("O")) {
-      alert(`Player O wins!`);
-    }
+    if (hasWon("X")) alert(`Player X wins!`);
+    if (hasWon("O")) alert(`Player O wins!`);
+    state.numTurns++;
+    if (state.numTurns === 9) alert("Tie!");
     state.advanceTurn.call(state);
   });
 }

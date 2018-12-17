@@ -8,14 +8,22 @@ var state = {
     }
   },
   board: [["", "", ""], ["", "", ""], ["", "", ""]],
-  numTurns: 0
+  numTurns: 0,
+  reset: function() {
+    this.upNext = "X";
+    this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
+    this.numTurns = 0;
+    var cells = document.querySelectorAll("td");
+    for (var i = 0; i < cells.length; i++) {
+      cells[i].innerHTML = "";
+    }
+  }
 };
 
 // add click handlers to board cells
-var cells = document.querySelectorAll("td");
-for (var i = 0; i < cells.length; i++) {
-  cells[i].addEventListener("click", function(event) {
-    // debugger;
+let html_board = document.getElementById("board");
+html_board.addEventListener("click", e => {
+  if (e.target !== e.currentTarget) {
     var rows = Array.from(document.getElementsByTagName("tr"));
     var rowIndex = rows.indexOf(event.target.parentNode);
     var cols = Array.from(event.target.parentNode.children);
@@ -23,13 +31,26 @@ for (var i = 0; i < cells.length; i++) {
     console.log(`clicked row ${rowIndex}, col ${colIndex}`);
     event.target.innerHTML = state.upNext;
     state.board[rowIndex][colIndex] = state.upNext;
-    if (hasWon("X")) alert(`Player X wins!`);
-    if (hasWon("O")) alert(`Player O wins!`);
+    if (hasWon("X")) {
+      alert(`Player X wins!`);
+      state.reset();
+      return;
+    }
+    if (hasWon("O")) {
+      alert(`Player O wins!`);
+      state.reset();
+      return;
+    }
     state.numTurns++;
-    if (state.numTurns === 9) alert("Tie!");
+    if (state.numTurns === 9) {
+      alert("Tie!");
+      state.reset();
+      return;
+    }
     state.advanceTurn.call(state);
-  });
-}
+  }
+  e.stopPropagation();
+});
 
 function hasWon(player) {
   let board = state.board;
@@ -66,3 +87,9 @@ function hasWon(player) {
     return true;
   return false;
 }
+
+// reset game when reset button is clicked
+let resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", event => {
+  state.reset();
+});

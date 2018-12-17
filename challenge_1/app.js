@@ -69,6 +69,12 @@ html_board.addEventListener("click", e => {
     var cols = Array.from(event.target.parentNode.children);
     var colIndex = cols.indexOf(event.target);
 
+    // check if cell is open
+    if (state.board[rowIndex][colIndex] !== "") {
+      alert("Square already taken. Please choose another.");
+      return;
+    }
+
     // update text in cell
     event.target.style.color = state.playerColors[state.upNext];
     event.target.style.backgroundColor =

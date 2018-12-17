@@ -9,6 +9,10 @@ var state = {
   },
   board: [["", "", ""], ["", "", ""], ["", "", ""]],
   numTurns: 0,
+  playerNames: {
+    X: prompt("Player X name:"),
+    O: prompt("Player O name:")
+  },
   reset: function(winner) {
     this.upNext = winner || "X";
     this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
@@ -60,12 +64,15 @@ html_board.addEventListener("click", e => {
   e.stopPropagation();
 });
 
+// update page with player names
+updateWinCountDiv();
+
 // display win count
 function updateWinCountDiv() {
   let winCountDiv = document.getElementById("winCount");
   winCountDiv.innerHTML = `<b>Wins:</b><br>
-  X: ${state.winCounts.X}<br>
-  O: ${state.winCounts.O}`;
+  X - ${state.playerNames.X}: ${state.winCounts.X}<br>
+  O - ${state.playerNames.O}: ${state.winCounts.O}`;
 }
 
 function hasWon(player) {
@@ -107,7 +114,7 @@ function hasWon(player) {
 // display win notification
 function displayWinNotification(winner) {
   let div = document.getElementById("result_notification");
-  div.innerHTML = `Player ${winner} wins!`;
+  div.innerHTML = `${state.playerNames[winner]} wins!`;
 }
 
 // display tie notification

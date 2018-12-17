@@ -9,8 +9,8 @@ var state = {
   },
   board: [["", "", ""], ["", "", ""], ["", "", ""]],
   numTurns: 0,
-  reset: function() {
-    this.upNext = "X";
+  reset: function(winner) {
+    this.upNext = winner;
     this.board = [["", "", ""], ["", "", ""], ["", "", ""]];
     this.numTurns = 0;
     var cells = document.querySelectorAll("td");
@@ -33,18 +33,18 @@ html_board.addEventListener("click", e => {
     state.board[rowIndex][colIndex] = state.upNext;
     if (hasWon("X")) {
       alert(`Player X wins!`);
-      state.reset();
+      state.reset("X");
       return;
     }
     if (hasWon("O")) {
       alert(`Player O wins!`);
-      state.reset();
+      state.reset("O");
       return;
     }
     state.numTurns++;
     if (state.numTurns === 9) {
       alert("Tie!");
-      state.reset();
+      state.reset("X");
       return;
     }
     state.advanceTurn.call(state);

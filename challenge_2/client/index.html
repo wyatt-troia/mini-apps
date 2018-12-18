@@ -8,9 +8,10 @@
   </head>
   <body>
     <h1>Convert JSON to CSV</h1>
-    <form action="/JSON-to-CSV" method="post">
+    <form action="/JSON-to-CSV" method="post" enctype="multipart/form-data">
       <b><label for="JSON">JSON:</label></b> <br />
-      <textarea id="JSON" name="JSON"></textarea> <br />
+      <input type="file" id="JSON" name="JSON" accept=".json" /> <br />
+      <br />
       <input type="submit" value="Submit" />
     </form>
   </body>

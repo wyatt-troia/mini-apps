@@ -40,7 +40,7 @@ app.post("/JSON-to-CSV", (req, res) => {
     });
   });
 
-    // var busboy = new Busboy({ headers: req.headers });
+  // var busboy = new Busboy({ headers: req.headers });
   // busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
   //   console.log("filename: " + filename);
   //   var saveTo = path.join(__dirname, "./json_input/", filename);
@@ -95,28 +95,29 @@ app.post("/JSON-to-CSV", (req, res) => {
     console.log(fields);
     console.log(flattenedRecords);
     let html_csv = csv.split("\n").join("<br>");
-    res.send(`
-    <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-          <title>JSON-to-CSV</title>
-        </head>
-        <body>
-          <h1>Convert JSON to CSV</h1>
-          <form action="/JSON-to-CSV" method="post" enctype="multipart/form-data">
-            <b><label for="JSON">JSON:</label></b> <br />
-            <input type="file" id="JSON" name="JSON" accept=".json" /> <br />
-            <br />
-            <input type="submit" value="Submit" />
-          </form>
-          <br>
-          <div id="CSV_result"><b>CSV:</b> <br>${html_csv}</div>
-        </body>
-      </html>
-      `);
+    res.send(html_csv);
+    // res.send(`
+    // <!DOCTYPE html>
+    //   <html lang="en">
+    //     <head>
+    //       <meta charset="UTF-8" />
+    //       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    //       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    //       <title>JSON-to-CSV</title>
+    //     </head>
+    //     <body>
+    //       <h1>Convert JSON to CSV</h1>
+    //       <form action="/JSON-to-CSV" method="post" enctype="multipart/form-data">
+    //         <b><label for="JSON">JSON:</label></b> <br />
+    //         <input type="file" id="JSON" name="JSON" accept=".json" /> <br />
+    //         <br />
+    //         <input type="submit" value="Submit" />
+    //       </form>
+    //       <br>
+    //       <div id="CSV_result"><b>CSV:</b> <br>${html_csv}</div>
+    //     </body>
+    //   </html>
+    //   `);
   });
   req.pipe(busboy);
 });

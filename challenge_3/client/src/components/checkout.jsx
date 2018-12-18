@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-
-class Checkout extends Component {
+class Checkout extends React.Component {
   render() {
     return (
       <div>
         <h1>Checkout</h1>
+        <F1 />
       </div>
     );
   }
 }
 
-export default Checkout;
+window.Checkout = Checkout;

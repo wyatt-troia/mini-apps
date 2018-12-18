@@ -4,7 +4,7 @@ const port = 3000;
 const path = require("path");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const fs = require("fs-extra");
+const fs = require("fs");
 var Busboy = require("busboy");
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -39,13 +39,11 @@ app.post("/JSON-to-CSV", (req, res) => {
       console.log(JSON.parse(json));
     });
   });
-
-  // var busboy = new Busboy({ headers: req.headers });
   // busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
   //   console.log("filename: " + filename);
-  //   var saveTo = path.join(__dirname, "./json_input/", filename);
-  //   console.log("Uploading: " + saveTo);
-  //   file.pipe(fs.createWriteStream(saveTo));
+  // var saveTo = path.join(__dirname, "./json_input/", filename);
+  // console.log("Uploading: " + saveTo);
+  // file.pipe(fs.createWriteStream(saveTo));
   // });
   // busboy.on("finish", function() {
   //   console.log("Upload complete");
@@ -94,6 +92,14 @@ app.post("/JSON-to-CSV", (req, res) => {
     console.log(csv);
     console.log(fields);
     console.log(flattenedRecords);
+
+    // save csv string to csv file
+    var saveTo = path.join(__dirname, "/client/latest.csv");
+    fs.writeFile(saveTo, csv, err => {
+      if (err) throw err;
+      console.log("The CSV file has been saved!");
+    });
+
     let html_csv = csv.split("\n").join("<br>");
     res.send(html_csv);
     // res.send(`
@@ -120,6 +126,10 @@ app.post("/JSON-to-CSV", (req, res) => {
     //   `);
   });
   req.pipe(busboy);
+});
+
+app.get("/download_latest_csv", (req, res) => {
+  res.download("./client/latest.csv");
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

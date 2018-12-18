@@ -35,6 +35,9 @@ $(":button").on("click", function() {
     },
     success: function(result) {
       $("#CSV_result").html(result);
+      $("#CSV").append(
+        '<br><div id="CSV_download"> <a href="/download_latest_csv">Download CSV</a> </div>'
+      );
     }
   });
 });

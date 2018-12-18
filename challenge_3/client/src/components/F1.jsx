@@ -52,7 +52,8 @@ class F1 extends React.Component {
           </div>
           <br />
           <div>
-            <button>Next</button>
+            <Link to="/F2"><button>Next</button></Link>
+            
           </div>
         </form>
       </div>

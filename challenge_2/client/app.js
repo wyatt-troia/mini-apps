@@ -1,7 +1,6 @@
 $(document).ready(function() {
   $(":button").on("click", function() {
     var fileInput = $("input[name=file]")[0];
-    debugger;
     if (fileInput.files.length < 1) {
       alert("You must upload a file");
     } else {

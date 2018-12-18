@@ -14,8 +14,6 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "/client")));
 
 app.post("/JSON-to-CSV", (req, res) => {
-  // console.log(JSON.parse(req.body.JSON));
-
   var busboy = new Busboy({ headers: req.headers });
   let json = "";
   busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
@@ -39,6 +37,7 @@ app.post("/JSON-to-CSV", (req, res) => {
       console.log(JSON.parse(json));
     });
   });
+
   // busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
   //   console.log("filename: " + filename);
   // var saveTo = path.join(__dirname, "./json_input/", filename);
@@ -51,12 +50,13 @@ app.post("/JSON-to-CSV", (req, res) => {
   //   res.end("That's all folks!");
   // });
   // return req.pipe(busboy);
+
   busboy.on("finish", function() {
     console.log("Done parsing form!");
     let record = JSON.parse(json);
 
     let flattenedRecords = [];
-    let fields = [];
+    let fields = ["id"];
 
     // create flat array of record objects and array of record fields
     (function addToFlattenedRecords(record) {
@@ -67,6 +67,7 @@ app.post("/JSON-to-CSV", (req, res) => {
           if (!fields.includes(prop)) {
             fields.push(prop);
           }
+          // decorate recordWithoutChildren with non-children props
           recordWithoutChildren[prop] = record[prop];
         }
       }
@@ -79,10 +80,15 @@ app.post("/JSON-to-CSV", (req, res) => {
 
     // create array of arrays for each record (inner array = record field)
     let rows = [fields.join(",")];
-    for (var flattenedRecord of flattenedRecords) {
+    for (let i = 0; i < flattenedRecords.length; i++) {
+      let flattenedRecord = flattenedRecords[i];
       let recordArray = [];
       for (var field of fields) {
-        recordArray.push(flattenedRecord[field]);
+        if (field === "id") {
+          recordArray.push(i);
+        } else {
+          recordArray.push(flattenedRecord[field]);
+        }
       }
       rows.push(recordArray.join(","));
     }

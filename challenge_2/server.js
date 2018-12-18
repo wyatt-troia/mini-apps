@@ -39,6 +39,20 @@ app.post("/JSON-to-CSV", (req, res) => {
       console.log(JSON.parse(json));
     });
   });
+
+    // var busboy = new Busboy({ headers: req.headers });
+  // busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
+  //   console.log("filename: " + filename);
+  //   var saveTo = path.join(__dirname, "./json_input/", filename);
+  //   console.log("Uploading: " + saveTo);
+  //   file.pipe(fs.createWriteStream(saveTo));
+  // });
+  // busboy.on("finish", function() {
+  //   console.log("Upload complete");
+  //   res.writeHead(200, { Connection: "close" });
+  //   res.end("That's all folks!");
+  // });
+  // return req.pipe(busboy);
   busboy.on("finish", function() {
     console.log("Done parsing form!");
     let record = JSON.parse(json);

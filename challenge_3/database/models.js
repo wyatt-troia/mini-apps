@@ -15,7 +15,30 @@ var knex = require("knex")({
   }
 });
 
-knex
-  .select()
-  .table("purchases")
-  .then(result => console.log(result));
+const insert = async () => {
+  let result = await knex("purchases").insert({});
+  let purchase_id = result[0];
+  return purchase_id;
+};
+
+const update = async data => {
+  let purchase_id = data.purchase_id;
+  console.log("data:");
+  console.log(data);
+  console.log(
+    knex("purchases")
+      .where({ purchase_id })
+      .update(data)
+      .toSQL()
+  );
+  let result = await knex("purchases")
+    .where({ purchase_id })
+    .update(data);
+  console.log(result);
+  return result;
+};
+
+module.exports = {
+  insert,
+  update
+};

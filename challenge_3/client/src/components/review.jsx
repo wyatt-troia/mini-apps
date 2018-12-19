@@ -1,7 +1,7 @@
 class Review extends React.Component {
   constructor(props) {
     super(props);
-    this.cc_expiration = {
+    this.state = {
       name: "",
       email: "",
       password: "",
@@ -16,14 +16,20 @@ class Review extends React.Component {
       cc_cvv: "",
       billing_zip: ""
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
-    this.setcc_expiration({
-      [target.name]: target.value
-    });
+  componentDidMount() {
+    console.log("review component mounted");
+    axios
+      .get("/purchase", {
+        params: {
+          purchase_id: this.props.purchase_id
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        this.setState(response.data);
+      });
   }
 
   render() {
@@ -31,21 +37,21 @@ class Review extends React.Component {
       <div>
         <h2>Review Purchase</h2>
         <h3>User Information</h3>
-        <p>Name: {this.props.name}</p>
-        <p>Email: {this.props.email}</p>
-        <p>Password: {this.props.password}</p>
+        <p>Name: {this.state.name}</p>
+        <p>Email: {this.state.email}</p>
+        <p>Password: {this.state.password}</p>
         <h3>Shipping Address</h3>
-        <p>Line 1: {this.props.address_1}</p>
-        <p>Line 2: {this.props.address_2}</p>
-        <p>City: {this.props.city}</p>
-        <p>State: {this.props.state}</p>
-        <p>Zip: {this.props.zip}</p>
-        <p>Phone: {this.props.phone}</p>
+        <p>Line 1: {this.state.address_1}</p>
+        <p>Line 2: {this.state.address_2}</p>
+        <p>City: {this.state.city}</p>
+        <p>State: {this.state.state}</p>
+        <p>Zip: {this.state.zip}</p>
+        <p>Phone: {this.state.phone}</p>
         <h3>Credit Card Information</h3>
-        <p>Number: {this.props.cc_number}</p>
-        <p>Expiration: {this.props.cc_expiration}</p>
-        <p>CVV: {this.props.cc_cvv}</p>
-        <p>Billing Zip Code: {this.props.billing_zip}</p>
+        <p>Number: {this.state.cc_number}</p>
+        <p>Expiration: {this.state.cc_expiration}</p>
+        <p>CVV: {this.state.cc_cvv}</p>
+        <p>Billing Zip Code: {this.state.billing_zip}</p>
 
         <div>
           <Link to="/">

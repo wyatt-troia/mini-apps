@@ -22,4 +22,10 @@ app.put("/purchase", async (req, res) => {
   res.send({ rowsAffected: result });
 });
 
+app.get("/purchase", async (req, res) => {
+  console.log(`purchase_id sent with get request: ${req.query.purchase_id}`);
+  let result = await models.get(req.query.purchase_id);
+  res.send(result);
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

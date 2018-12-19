@@ -32,7 +32,16 @@ const update = async data => {
   return result;
 };
 
+const get = async purchase_id => {
+  console.log(`about to get purchase_id ${purchase_id}`);
+  let result = await knex("purchases")
+    .where({ purchase_id })
+    .select();
+  return result[0];
+};
+
 module.exports = {
   insert,
-  update
+  update,
+  get
 };

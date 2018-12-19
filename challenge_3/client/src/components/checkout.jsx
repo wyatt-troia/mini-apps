@@ -13,6 +13,7 @@ class Checkout extends React.Component {
           <h1>Checkout</h1>
           <Route exact path="/" component={F1} />
           <Route exact path="/F2" component={F2} />
+          <Route exact path="/F3" component={F3} />
         </div>
       </Router>
     );

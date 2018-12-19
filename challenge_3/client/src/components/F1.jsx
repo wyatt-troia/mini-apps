@@ -21,7 +21,7 @@ class F1 extends React.Component {
       <div>
         <form>
           <div>
-            <label>Name:</label>
+            <label>Name: </label>
             <input
               type="text"
               name="name"
@@ -31,7 +31,7 @@ class F1 extends React.Component {
             />
           </div>
           <div>
-            <label>Email:</label>
+            <label>Email: </label>
             <input
               type="text"
               name="email"
@@ -41,7 +41,7 @@ class F1 extends React.Component {
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label>Password: </label>
             <input
               type="password"
               name="password"
@@ -52,8 +52,9 @@ class F1 extends React.Component {
           </div>
           <br />
           <div>
-            <Link to="/F2"><button>Next</button></Link>
-            
+            <Link to="/F2">
+              <button>Next</button>
+            </Link>
           </div>
         </form>
       </div>

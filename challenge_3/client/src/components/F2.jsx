@@ -25,7 +25,7 @@ class F2 extends React.Component {
               <label>Shipping Address:</label>
             </div>
             <div>
-              <label>Line 1:</label>
+              <label>Line 1: </label>
               <input
                 type="text"
                 name="address_1"
@@ -35,7 +35,7 @@ class F2 extends React.Component {
               />
             </div>
             <div>
-              <label>Line 2:</label>
+              <label>Line 2: </label>
               <input
                 type="text"
                 name="state"
@@ -45,7 +45,7 @@ class F2 extends React.Component {
               />
             </div>
             <div>
-              <label>City:</label>
+              <label>City: </label>
               <input
                 type="text"
                 name="city"
@@ -55,7 +55,7 @@ class F2 extends React.Component {
               />
             </div>
             <div>
-              <label>State:</label>
+              <label>State: </label>
               <input
                 type="text"
                 name="state"
@@ -65,7 +65,7 @@ class F2 extends React.Component {
               />
             </div>
             <div>
-              <label>Zip Code:</label>
+              <label>Zip Code: </label>
               <input
                 type="text"
                 name="zip_code"
@@ -77,7 +77,7 @@ class F2 extends React.Component {
           </div>
           <br />
           <div>
-            <label>Phone:</label>
+            <label>Phone: </label>
             <input
               type="text"
               name="phone"

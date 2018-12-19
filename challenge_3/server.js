@@ -19,7 +19,7 @@ app.put("/purchase", async (req, res) => {
   console.log(req.body);
   let result = await models.update(req.body);
 
-  res.send("coming soon");
+  res.send({ rowsAffected: result });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

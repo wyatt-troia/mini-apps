@@ -92,7 +92,16 @@ class F2 extends React.Component {
           <br />
           <div>
             <Link to="/F3">
-              <button>Next</button>
+              <button
+                onClick={() =>
+                  this.props.updatePurchaseRecord({
+                    ...this.state,
+                    purchase_id: this.props.purchase_id
+                  })
+                }
+              >
+                Next
+              </button>
             </Link>
           </div>
         </form>

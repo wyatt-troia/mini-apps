@@ -49,8 +49,26 @@ class Checkout extends React.Component {
               />
             )}
           />
-          <Route path="/F2" component={F2} />
-          <Route path="/F3" component={F3} />
+          <Route
+            path="/F2"
+            render={props => (
+              <F2
+                {...props}
+                updatePurchaseRecord={this.updatePurchaseRecord}
+                purchase_id={this.state.purchase_id}
+              />
+            )}
+          />
+          <Route
+            path="/F3"
+            render={props => (
+              <F3
+                {...props}
+                updatePurchaseRecord={this.updatePurchaseRecord}
+                purchase_id={this.state.purchase_id}
+              />
+            )}
+          />
           <Route path="/review" component={Review} />
         </div>
       </Router>

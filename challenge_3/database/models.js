@@ -25,16 +25,10 @@ const update = async data => {
   let purchase_id = data.purchase_id;
   console.log("data:");
   console.log(data);
-  console.log(
-    knex("purchases")
-      .where({ purchase_id })
-      .update(data)
-      .toSQL()
-  );
   let result = await knex("purchases")
     .where({ purchase_id })
     .update(data);
-  console.log(result);
+  console.log(`rows affected ${result}`);
   return result;
 };
 

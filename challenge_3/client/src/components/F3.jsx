@@ -71,7 +71,16 @@ class F3 extends React.Component {
 
           <div>
             <Link to="/review">
-              <button>Review</button>
+              <button
+                onClick={() =>
+                  this.props.updatePurchaseRecord({
+                    ...this.state,
+                    purchase_id: this.props.purchase_id
+                  })
+                }
+              >
+                Review
+              </button>
             </Link>
           </div>
         </form>

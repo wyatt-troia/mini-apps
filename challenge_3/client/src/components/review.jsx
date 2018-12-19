@@ -48,8 +48,8 @@ class Review extends React.Component {
         <p>Billing Zip Code: {this.props.billing_zip}</p>
 
         <div>
-          <Link to="/confirmation">
-            <button>Next</button>
+          <Link to="/">
+            <button>Purchase</button>
           </Link>
         </div>
       </div>

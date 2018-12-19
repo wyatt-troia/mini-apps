@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "db-init": "mysql -u root -p < initDB.sql",
     "start": "node server.js",
     "server-dev": "nodemon server.js",
     "build": "npx babel --watch client/src --out-dir client/dist --presets react-app/prod"
@@ -16,6 +17,8 @@
     "@babel/cli": "^7.2.0",
     "babel-preset-react-app": "^3.1.2",
     "express": "^4.16.4",
+    "knex": "^0.16.2",
+    "mysql": "^2.16.0",
     "react": "^16.6.3",
     "react-router-dom": "^4.3.1"
   },

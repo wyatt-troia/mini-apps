@@ -74,12 +74,15 @@ class F3 extends React.Component {
               <button
                 onClick={() =>
                   this.props.updatePurchaseRecord({
-                    ...this.state,
+                    cc_number: this.state.cc_number,
+                    cc_expiration: this.state.cc_expiration,
+                    cc_cvv: this.state.cc_cvv,
+                    billing_zip: this.state.billing_zip,
                     purchase_id: this.props.purchase_id
                   })
                 }
               >
-                Review
+                >Review
               </button>
             </Link>
           </div>

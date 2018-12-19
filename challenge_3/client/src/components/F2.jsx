@@ -95,7 +95,12 @@ class F2 extends React.Component {
               <button
                 onClick={() =>
                   this.props.updatePurchaseRecord({
-                    ...this.state,
+                    address_1: this.state.address_1,
+                    address_2: this.state.address_2,
+                    city: this.state.city,
+                    state: this.state.state,
+                    zip_code: this.state.zip_code,
+                    phone: this.state.phone,
                     purchase_id: this.props.purchase_id
                   })
                 }

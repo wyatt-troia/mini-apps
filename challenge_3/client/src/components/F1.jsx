@@ -4,7 +4,11 @@ class F1 extends React.Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      formErrors: { name: "", email: "", password: "" },
+      emailValid: false,
+      passwordValid: false,
+      formValid: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -19,6 +23,9 @@ class F1 extends React.Component {
   render() {
     return (
       <div>
+        <div className="panel panel-default">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
         <form>
           <div>
             <label>Name: </label>
@@ -56,7 +63,9 @@ class F1 extends React.Component {
               <button
                 onClick={() =>
                   this.props.updatePurchaseRecord({
-                    ...this.state,
+                    name: this.state.name,
+                    email: this.state.email,
+                    password: this.state.password,
                     purchase_id: this.props.purchase_id
                   })
                 }

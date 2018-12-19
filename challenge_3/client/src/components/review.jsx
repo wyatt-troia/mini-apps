@@ -45,7 +45,7 @@ class Review extends React.Component {
         <p>Line 2: {this.state.address_2}</p>
         <p>City: {this.state.city}</p>
         <p>State: {this.state.state}</p>
-        <p>Zip: {this.state.zip}</p>
+        <p>Zip: {this.state.zip_code}</p>
         <p>Phone: {this.state.phone}</p>
         <h3>Credit Card Information</h3>
         <p>Number: {this.state.cc_number}</p>

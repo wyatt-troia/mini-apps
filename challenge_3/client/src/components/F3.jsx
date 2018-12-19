@@ -1,17 +1,18 @@
 class F3 extends React.Component {
   constructor(props) {
     super(props);
-    this.cc_expiration = {
-      name: "",
-      email: "",
-      password: ""
+    this.state = {
+      cc_number: "",
+      cc_expiration: "",
+      cc_cvv: "",
+      billing_zip: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
     const target = event.target;
-    this.setcc_expiration({
+    this.setState({
       [target.name]: target.value
     });
   }
@@ -69,8 +70,8 @@ class F3 extends React.Component {
           <br />
 
           <div>
-            <Link to="/">
-              <button>Purchase</button>
+            <Link to="/review">
+              <button>Review</button>
             </Link>
           </div>
         </form>

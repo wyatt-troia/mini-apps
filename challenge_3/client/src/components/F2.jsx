@@ -2,9 +2,12 @@ class F2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
-      password: ""
+      address_1: "",
+      address_2: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      phone: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -38,10 +41,10 @@ class F2 extends React.Component {
               <label>Line 2: </label>
               <input
                 type="text"
-                name="state"
-                id="state"
+                name="address_2"
+                id="address_2"
                 onChange={this.handleChange}
-                autoComplete="state"
+                autoComplete="address_2"
               />
             </div>
             <div>

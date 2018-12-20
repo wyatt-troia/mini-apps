@@ -8,9 +8,10 @@ class F1 extends React.Component {
       formErrors: { name: "", email: "", password: "" },
       emailValid: false,
       passwordValid: false,
-      formValid: false
+      formIsValid: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   handleChange(event) {
@@ -20,12 +21,33 @@ class F1 extends React.Component {
     });
   }
 
+  validateForm() {
+    let isValid = true;
+    let formErrors = { name: "", email: "", password: "" };
+    // validate name
+    if (this.state.name === "") {
+      isValid = false;
+      formErrors.name = "Name is required";
+    }
+
+    // validate email
+    if (this.state.email === "") {
+      isValid = false;
+      formErrors.email = "Email is required";
+    }
+
+    // validate password
+    if (this.state.password === "") {
+      isValid = false;
+      formErrors.password = "Password is required";
+    }
+    this.setState({ formErrors, formIsValid: isValid });
+    return isValid;
+  }
+
   render() {
     return (
       <div>
-        <div className="panel panel-default">
-          <FormErrors formErrors={this.state.formErrors} />
-        </div>
         <form>
           <div>
             <label>Name: </label>
@@ -59,22 +81,31 @@ class F1 extends React.Component {
           </div>
           <br />
           <div>
-            <Link to="/F2">
-              <button
-                onClick={() =>
-                  this.props.updatePurchaseRecord({
-                    name: this.state.name,
-                    email: this.state.email,
-                    password: this.state.password,
-                    purchase_id: this.props.purchase_id
-                  })
-                }
-              >
-                Next
-              </button>
-            </Link>
+            {this.state.formIsValid ? (
+              <Link to="/F2">
+                <button
+                  onClick={() => {
+                    this.props.updatePurchaseRecord({
+                      name: this.state.name,
+                      email: this.state.email,
+                      password: this.state.password,
+                      purchase_id: this.props.purchase_id
+                    });
+                  }}
+                >
+                  Next
+                </button>
+              </Link>
+            ) : (
+              <div onMouseEnter={this.validateForm}>
+                <button disabled={!this.state.formIsValid}>Next</button>
+              </div>
+            )}
           </div>
         </form>
+        <div className="panel panel-default">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
       </div>
     );
   }

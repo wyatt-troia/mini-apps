@@ -5,9 +5,16 @@ class F3 extends React.Component {
       cc_number: "",
       cc_expiration: "",
       cc_cvv: "",
-      billing_zip: ""
+      billing_zip: "",
+      formErrors: {
+        cc_number: "",
+        cc_expiration: "",
+        cc_cvv: "",
+        billing_zip: ""
+      }
     };
     this.handleChange = this.handleChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   handleChange(event) {
@@ -15,6 +22,42 @@ class F3 extends React.Component {
     this.setState({
       [target.name]: target.value
     });
+  }
+
+  validateForm() {
+    let isValid = true;
+    let formErrors = {
+      cc_number: "",
+      cc_expiration: "",
+      cc_cvv: "",
+      billing_zip: ""
+    };
+    // validate cc_number
+    if (this.state.cc_number === "") {
+      isValid = false;
+      formErrors.cc_number = "Credit card number is required";
+    }
+
+    // validate cc_expiration
+    if (this.state.cc_expiration === "") {
+      isValid = false;
+      formErrors.cc_expiration = "Credit card expiration date is required";
+    }
+
+    // validate cc_cvv
+    if (this.state.cc_cvv === "") {
+      isValid = false;
+      formErrors.cc_cvv = "Credit card CVV is required";
+    }
+
+    // validate billing_zip
+    if (this.state.billing_zip === "") {
+      isValid = false;
+      formErrors.billing_zip = "Billing zip code is required";
+    }
+
+    this.setState({ formErrors, formIsValid: isValid });
+    return isValid;
   }
 
   render() {
@@ -68,25 +111,33 @@ class F3 extends React.Component {
             </div>
           </div>
           <br />
-
           <div>
-            <Link to="/review">
-              <button
-                onClick={() =>
-                  this.props.updatePurchaseRecord({
-                    cc_number: this.state.cc_number,
-                    cc_expiration: this.state.cc_expiration,
-                    cc_cvv: this.state.cc_cvv,
-                    billing_zip: this.state.billing_zip,
-                    purchase_id: this.props.purchase_id
-                  })
-                }
-              >
-                >Review
-              </button>
-            </Link>
+            {this.state.formIsValid ? (
+              <Link to="/review" onMouseEnter={this.validateForm}>
+                <button
+                  onClick={() =>
+                    this.props.updatePurchaseRecord({
+                      cc_number: this.state.cc_number,
+                      cc_expiration: this.state.cc_expiration,
+                      cc_cvv: this.state.cc_cvv,
+                      billing_zip: this.state.billing_zip,
+                      purchase_id: this.props.purchase_id
+                    })
+                  }
+                >
+                  Review
+                </button>
+              </Link>
+            ) : (
+              <span onMouseEnter={this.validateForm}>
+                <button disabled={!this.state.formIsValid}>Review</button>
+              </span>
+            )}
           </div>
         </form>
+        <div className="errors">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
       </div>
     );
   }

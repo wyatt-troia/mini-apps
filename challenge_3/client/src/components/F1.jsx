@@ -6,8 +6,6 @@ class F1 extends React.Component {
       email: "",
       password: "",
       formErrors: { name: "", email: "", password: "" },
-      emailValid: false,
-      passwordValid: false,
       formIsValid: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -31,9 +29,12 @@ class F1 extends React.Component {
     }
 
     // validate email
-    if (this.state.email === "") {
+    if (
+      this.state.email === "" ||
+      !this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+    ) {
       isValid = false;
-      formErrors.email = "Email is required";
+      formErrors.email = "A valid email is required";
     }
 
     // validate password
@@ -82,7 +83,7 @@ class F1 extends React.Component {
           <br />
           <div>
             {this.state.formIsValid ? (
-              <Link to="/F2">
+              <Link to="/F2" onMouseEnter={this.validateForm}>
                 <button
                   onClick={() => {
                     this.props.updatePurchaseRecord({
@@ -97,13 +98,13 @@ class F1 extends React.Component {
                 </button>
               </Link>
             ) : (
-              <div onMouseEnter={this.validateForm}>
+              <span onMouseEnter={this.validateForm}>
                 <button disabled={!this.state.formIsValid}>Next</button>
-              </div>
+              </span>
             )}
           </div>
         </form>
-        <div className="panel panel-default">
+        <div className="errors">
           <FormErrors formErrors={this.state.formErrors} />
         </div>
       </div>

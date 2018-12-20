@@ -7,9 +7,18 @@ class F2 extends React.Component {
       city: "",
       state: "",
       zip_code: "",
-      phone: ""
+      phone: "",
+      formErrors: {
+        address_1: "",
+        city: "",
+        state: "",
+        zip_code: "",
+        phone: ""
+      },
+      formIsValid: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   handleChange(event) {
@@ -17,6 +26,47 @@ class F2 extends React.Component {
     this.setState({
       [target.name]: target.value
     });
+  }
+
+  validateForm() {
+    let isValid = true;
+    let formErrors = {
+      address_1: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      phone: ""
+    };
+    // validate address_1
+    if (this.state.address_1 === "") {
+      isValid = false;
+      formErrors.address_1 = "Street address is required";
+    }
+
+    // validate city
+    if (this.state.city === "") {
+      isValid = false;
+      formErrors.city = "City is required";
+    }
+
+    // validate state
+    if (this.state.state === "") {
+      isValid = false;
+      formErrors.state = "State is required";
+    }
+
+    // validate zip_code
+    if (this.state.zip_code === "") {
+      isValid = false;
+      formErrors.zip_code = "Zip code is required";
+    }
+    // validate phone
+    if (this.state.phone === "") {
+      isValid = false;
+      formErrors.phone = "Phone number is required";
+    }
+    this.setState({ formErrors, formIsValid: isValid });
+    return isValid;
   }
 
   render() {
@@ -91,25 +141,34 @@ class F2 extends React.Component {
           </div>
           <br />
           <div>
-            <Link to="/F3">
-              <button
-                onClick={() =>
-                  this.props.updatePurchaseRecord({
-                    address_1: this.state.address_1,
-                    address_2: this.state.address_2,
-                    city: this.state.city,
-                    state: this.state.state,
-                    zip_code: this.state.zip_code,
-                    phone: this.state.phone,
-                    purchase_id: this.props.purchase_id
-                  })
-                }
-              >
-                Next
-              </button>
-            </Link>
+            {this.state.formIsValid ? (
+              <Link to="/F3" onMouseEnter={this.validateForm}>
+                <button
+                  onClick={() =>
+                    this.props.updatePurchaseRecord({
+                      address_1: this.state.address_1,
+                      address_2: this.state.address_2,
+                      city: this.state.city,
+                      state: this.state.state,
+                      zip_code: this.state.zip_code,
+                      phone: this.state.phone,
+                      purchase_id: this.props.purchase_id
+                    })
+                  }
+                >
+                  Next
+                </button>
+              </Link>
+            ) : (
+              <span onMouseEnter={this.validateForm}>
+                <button disabled={!this.state.formIsValid}>Next</button>
+              </span>
+            )}
           </div>
         </form>
+        <div className="errors">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
       </div>
     );
   }

@@ -11,10 +11,6 @@ class Checkout extends React.Component {
     this.updatePurchaseId = this.updatePurchaseId.bind(this);
   }
 
-  componentDidMount() {
-    console.log("Checkout component mounted");
-  }
-
   updatePurchaseId(id) {
     this.setState({
       purchase_id: id

@@ -17,6 +17,12 @@ app.post("/purchase", async (req, res) => {
 
 app.put("/purchase", async (req, res) => {
   console.log(req.body);
+  if (req.body.cc_number === "") {
+    req.body.cc_number = 0;
+  }
+  if (req.body.cc_cvv === "") {
+    req.body.cc_cvv = 0;
+  }
   let result = await models.update(req.body);
 
   res.send({ rowsAffected: result });

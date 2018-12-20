@@ -12,6 +12,21 @@ class F1 extends React.Component {
     this.validateForm = this.validateForm.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.purchase_id) {
+      axios
+        .get("/purchase", {
+          params: {
+            purchase_id: this.props.purchase_id
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.setState(response.data);
+        });
+    }
+  }
+
   handleChange(event) {
     const target = event.target;
     this.setState({
@@ -58,6 +73,7 @@ class F1 extends React.Component {
               id="name"
               onChange={this.handleChange}
               autoComplete="name"
+              value={this.state.name}
             />
           </div>
           <div>
@@ -68,6 +84,7 @@ class F1 extends React.Component {
               id="email"
               onChange={this.handleChange}
               autoComplete="email"
+              value={this.state.email}
             />
           </div>
           <div>
@@ -78,6 +95,7 @@ class F1 extends React.Component {
               id="password"
               onChange={this.handleChange}
               autoComplete="new-password"
+              value={this.state.password}
             />
           </div>
           <br />

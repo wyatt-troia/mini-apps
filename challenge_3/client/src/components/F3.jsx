@@ -17,6 +17,28 @@ class F3 extends React.Component {
     this.validateForm = this.validateForm.bind(this);
   }
 
+  componentDidMount() {
+    axios
+      .get("/purchase", {
+        params: {
+          purchase_id: this.props.purchase_id
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        // only update state if fields are not null
+        if (response.data.cc_number) {
+          if (response.data.cc_number === 0) {
+            response.data.cc_number = "";
+          }
+          if (response.data.cc_cvv === 0) {
+            response.data.cc_cvv = "";
+          }
+          this.setState(response.data);
+        }
+      });
+  }
+
   handleChange(event) {
     const target = event.target;
     this.setState({
@@ -76,6 +98,7 @@ class F3 extends React.Component {
                 id="cc_number"
                 onChange={this.handleChange}
                 autoComplete="cc_number"
+                value={this.state.cc_number}
               />
             </div>
             <div>
@@ -86,6 +109,7 @@ class F3 extends React.Component {
                 id="cc_expiration"
                 onChange={this.handleChange}
                 autoComplete="cc_expiration"
+                value={this.state.cc_expiration}
               />
             </div>
             <div>
@@ -96,6 +120,7 @@ class F3 extends React.Component {
                 id="cc_cvv"
                 onChange={this.handleChange}
                 autoComplete="cc_cvv"
+                value={this.state.cc_cvv}
               />
             </div>
             <br />
@@ -107,11 +132,27 @@ class F3 extends React.Component {
                 id="billing_zip"
                 onChange={this.handleChange}
                 autoComplete="billing_zip"
+                value={this.state.billing_zip}
               />
             </div>
           </div>
           <br />
-          <div>
+          <Link to="/F2">
+            <button
+              onClick={() =>
+                this.props.updatePurchaseRecord({
+                  cc_number: this.state.cc_number,
+                  cc_expiration: this.state.cc_expiration,
+                  cc_cvv: this.state.cc_cvv,
+                  billing_zip: this.state.billing_zip,
+                  purchase_id: this.props.purchase_id
+                })
+              }
+            >
+              Back
+            </button>
+          </Link>
+          <span>
             {this.state.formIsValid ? (
               <Link to="/review" onMouseEnter={this.validateForm}>
                 <button
@@ -133,7 +174,7 @@ class F3 extends React.Component {
                 <button disabled={!this.state.formIsValid}>Review</button>
               </span>
             )}
-          </div>
+          </span>
         </form>
         <div className="errors">
           <FormErrors formErrors={this.state.formErrors} />

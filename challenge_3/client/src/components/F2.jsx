@@ -21,6 +21,22 @@ class F2 extends React.Component {
     this.validateForm = this.validateForm.bind(this);
   }
 
+  componentDidMount() {
+    axios
+      .get("/purchase", {
+        params: {
+          purchase_id: this.props.purchase_id
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        // only update state if fields are not null
+        if (response.data.address_1) {
+          this.setState(response.data);
+        }
+      });
+  }
+
   handleChange(event) {
     const target = event.target;
     this.setState({
@@ -85,6 +101,7 @@ class F2 extends React.Component {
                 id="address_1"
                 onChange={this.handleChange}
                 autoComplete="address_1"
+                value={this.state.address_1}
               />
             </div>
             <div>
@@ -95,6 +112,7 @@ class F2 extends React.Component {
                 id="address_2"
                 onChange={this.handleChange}
                 autoComplete="address_2"
+                value={this.state.address_2}
               />
             </div>
             <div>
@@ -105,6 +123,7 @@ class F2 extends React.Component {
                 id="city"
                 onChange={this.handleChange}
                 autoComplete="city"
+                value={this.state.city}
               />
             </div>
             <div>
@@ -115,6 +134,7 @@ class F2 extends React.Component {
                 id="state"
                 onChange={this.handleChange}
                 autoComplete="state"
+                value={this.state.state}
               />
             </div>
             <div>
@@ -125,6 +145,7 @@ class F2 extends React.Component {
                 id="zip_code"
                 onChange={this.handleChange}
                 autoComplete="zip_code"
+                value={this.state.zip_code}
               />
             </div>
           </div>
@@ -137,10 +158,28 @@ class F2 extends React.Component {
               id="phone"
               onChange={this.handleChange}
               autoComplete="phone"
+              value={this.state.phone}
             />
           </div>
           <br />
-          <div>
+          <Link to="/F1">
+            <button
+              onClick={() =>
+                this.props.updatePurchaseRecord({
+                  address_1: this.state.address_1,
+                  address_2: this.state.address_2,
+                  city: this.state.city,
+                  state: this.state.state,
+                  zip_code: this.state.zip_code,
+                  phone: this.state.phone,
+                  purchase_id: this.props.purchase_id
+                })
+              }
+            >
+              Back
+            </button>
+          </Link>
+          <span>
             {this.state.formIsValid ? (
               <Link to="/F3" onMouseEnter={this.validateForm}>
                 <button
@@ -164,7 +203,7 @@ class F2 extends React.Component {
                 <button disabled={!this.state.formIsValid}>Next</button>
               </span>
             )}
-          </div>
+          </span>
         </form>
         <div className="errors">
           <FormErrors formErrors={this.state.formErrors} />

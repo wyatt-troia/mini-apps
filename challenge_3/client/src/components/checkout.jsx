@@ -27,7 +27,7 @@ class Checkout extends React.Component {
     return (
       <Router>
         <div>
-          <h1>Checkout</h1>
+          <h1>Multi-Step Checkout</h1>
           <Route
             exact
             path="/"

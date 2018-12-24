@@ -1,0 +1,25 @@
+.board {
+  background-color: navy;
+  display: inline-block;
+  /* width: 100px; */
+}
+
+.row {
+  display: flex;
+}
+
+.square {
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: white;
+  height: 75%;
+  width: 75%;
+}

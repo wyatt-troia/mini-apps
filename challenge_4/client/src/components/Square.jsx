@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-const Square = ({ x, y, changeColor }) => (
+const Square = ({ x, y, handleClick }) => (
   <span x={x} y={y} className="square">
-    <div className="circle" onClick={changeColor} />
+    <div className="circle" onClick={handleClick} />
   </span>
 );
 

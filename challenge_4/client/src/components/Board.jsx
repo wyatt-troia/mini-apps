@@ -130,9 +130,11 @@ class Board extends Component {
       if (this.checkForWin(board)) {
         var winner = this.state.currentPlayer;
         let winnerColor = this.state.playerColors[winner];
+        let resultDiv = document.getElementById("result");
+        resultDiv.style.color = winnerColor;
         winnerColor =
           winnerColor.charAt(0).toUpperCase() + winnerColor.slice(1);
-        document.getElementById("result").innerHTML = `${winnerColor} wins!`;
+        resultDiv.innerHTML = `${winnerColor} wins!`;
       } else {
         var winner = null;
       }

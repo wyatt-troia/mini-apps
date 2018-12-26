@@ -68,6 +68,20 @@ class Board extends Component {
         }
       }
     }
+
+    // check for minor diagonal win
+    for (let col = 3; col < 9; col++) {
+      let count = 0;
+      for (let row = 0; row < board.length; row++) {
+        let element = board[row][col - row];
+        if (element === this.state.currentPlayer) {
+          count++;
+          if (count === 4) return true;
+        } else {
+          count = 0;
+        }
+      }
+    }
   }
   handleClick(e) {
     // determine column selected

@@ -13,17 +13,21 @@ class Board extends Component {
       }
       board.push(row);
     }
-    this.state = {
+    this.originalState = {
       currentPlayer: 1,
       playerColors: {
         1: "red",
         2: "green"
       },
       board,
-      winner: null
+      winner: null,
+      moveCount: 0,
+      originalState: this.state
     };
+    this.state = this.originalState;
     this.handleClick = this.handleClick.bind(this);
     this.checkForWin = this.checkForWin.bind(this);
+    this.reset = this.reset.bind(this);
   }
   checkForWin(board) {
     // check for horizontal win
@@ -84,6 +88,9 @@ class Board extends Component {
     }
   }
   handleClick(e) {
+    // only allow moves before a win
+    if (this.state.winner) return;
+
     // determine column selected
     let x = e.target.parentElement.getAttribute("x");
     let y = null;
@@ -105,7 +112,7 @@ class Board extends Component {
     // only allow move if there is an open circle in column
     if (y >= 0) {
       // create new board array reflecting current move
-      let board = this.state.board.slice();
+      let board = this.state.board.map(row => row.slice());
       board[y][x] = this.state.currentPlayer;
 
       // apply player's color to selected circle
@@ -127,20 +134,40 @@ class Board extends Component {
         var winner = null;
       }
 
+      // check for tie
+      if (this.state.moveCount + 1 === board[0].length * board.length) {
+        document.getElementById("result").innerHTML = `Tie!`;
+      }
+
       // update state with new current player and board
       this.setState(state => ({
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,
         board,
-        winner
+        winner,
+        moveCount: state.moveCount + 1
       }));
     }
+  }
+
+  reset() {
+    this.setState(this.originalState);
+    let circles = document.getElementsByClassName("circle");
+    circles = Array.from(circles);
+    circles.forEach(circle => (circle.style.backgroundColor = "white"));
   }
   render() {
     let rowNumbers = [0, 1, 2, 3, 4, 5];
     let rows = rowNumbers.map(rowNumber => (
       <Row y={rowNumber} key={rowNumber} handleClick={this.handleClick} />
     ));
-    return <div className="board">{rows}</div>;
+    return (
+      <React.Fragment>
+        <div className="board">{rows}</div>
+        <div>
+          <button onClick={this.reset}>Reset</button>
+        </div>
+      </React.Fragment>
+    );
   }
 }
 export default Board;

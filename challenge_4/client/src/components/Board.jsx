@@ -27,20 +27,38 @@ class Board extends Component {
   }
   checkForWin(board) {
     // check for horizontal win
-    for (let i = 0; i < board.length; i++) {
+    for (let row = 0; row < board.length; row++) {
       let count = 0;
-      for (let j = 0; j < board[0].length; j++) {
-        let element = board[i][j];
+      for (let col = 0; col < board[0].length; col++) {
+        let element = board[row][col];
         if (element === this.state.currentPlayer) {
           count++;
           if (count === 4) return true;
+        } else {
+          count = 0;
         }
       }
     }
 
     // check for vertical win
+    for (let col = 0; col < board[0].length; col++) {
+      let count = 0;
+      for (let row = 0; row < board.length; row++) {
+        let element = board[row][col];
+        if (element === this.state.currentPlayer) {
+          count++;
+          if (count === 4) return true;
+        } else {
+          count = 0;
+        }
+      }
+    }
 
-    // check for diagonal win
+    // check for major diagonal win
+    // for (let col = -2; col < 4; col++) {
+    //   let count = 0;
+    //   for (let row = 0; row < board.)
+    // }
   }
   handleClick(e) {
     // determine column selected

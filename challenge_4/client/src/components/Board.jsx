@@ -19,13 +19,36 @@ class Board extends Component {
         1: "red",
         2: "green"
       },
-      board
+      board,
+      winner: null
     };
     this.handleClick = this.handleClick.bind(this);
+    this.checkForWin = this.checkForWin.bind(this);
+  }
+  checkForWin(board) {
+    // check for horizontal win
+    for (let i = 0; i < board.length; i++) {
+      let count = 0;
+      for (let j = 0; j < board[0].length; j++) {
+        let element = board[i][j];
+        if (element === this.state.currentPlayer) {
+          count++;
+          if (count === 4) return true;
+        }
+      }
+    }
+
+    // check for vertical win
+
+    // check for diagonal win
   }
   handleClick(e) {
+    // determine column selected
     let x = e.target.parentElement.getAttribute("x");
     let y = null;
+
+    // determine how far down y axis the piece should fall
+    // by finding first open circle in selected column
     for (let i = 0; i < this.state.board.length; i++) {
       let rowElement = this.state.board[i][x];
       console.log(rowElement);
@@ -37,23 +60,37 @@ class Board extends Component {
         y = i;
       }
     }
-    console.log(`y: ${y}`);
+
+    // only allow move if there is an open circle in column
     if (y >= 0) {
-      let board = this.state.board;
+      // create new board array reflecting current move
+      let board = this.state.board.slice();
       board[y][x] = this.state.currentPlayer;
+
+      // apply player's color to selected circle
       let xElems = document.querySelectorAll(`[x="${x}"]`);
       xElems = Array.from(xElems);
       let yElems = document.querySelectorAll(`[y="${y}"]`);
       yElems = Array.from(yElems);
       let elem = xElems.filter(elem => -1 !== yElems.indexOf(elem))[0]
         .children[0];
-      console.log(elem);
-      // debugger;
       elem.style.backgroundColor = this.state.playerColors[
         this.state.currentPlayer
       ];
+      // debugger;
+      // check for win
+      if (this.checkForWin(board)) {
+        var winner = this.state.currentPlayer;
+        document.getElementById("result").innerHTML = `Player ${winner} wins!`;
+      } else {
+        var winner = null;
+      }
+
+      // update state with new current player and board
       this.setState(state => ({
-        currentPlayer: state.currentPlayer === 1 ? 2 : 1
+        currentPlayer: state.currentPlayer === 1 ? 2 : 1,
+        board,
+        winner
       }));
     }
   }

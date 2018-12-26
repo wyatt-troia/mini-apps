@@ -55,10 +55,19 @@ class Board extends Component {
     }
 
     // check for major diagonal win
-    // for (let col = -2; col < 4; col++) {
-    //   let count = 0;
-    //   for (let row = 0; row < board.)
-    // }
+    for (let col = -2; col < 4; col++) {
+      let count = 0;
+      for (let row = 0; row < board.length; row++) {
+        console.log(`col ${col} row ${row}`);
+        let element = board[row][col + row];
+        if (element === this.state.currentPlayer) {
+          count++;
+          if (count === 4) return true;
+        } else {
+          count = 0;
+        }
+      }
+    }
   }
   handleClick(e) {
     // determine column selected

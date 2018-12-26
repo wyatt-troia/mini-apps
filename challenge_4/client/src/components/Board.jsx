@@ -125,11 +125,14 @@ class Board extends Component {
       elem.style.backgroundColor = this.state.playerColors[
         this.state.currentPlayer
       ];
-      // debugger;
-      // check for win
+
+      // check for win and handle
       if (this.checkForWin(board)) {
         var winner = this.state.currentPlayer;
-        document.getElementById("result").innerHTML = `Player ${winner} wins!`;
+        let winnerColor = this.state.playerColors[winner];
+        winnerColor =
+          winnerColor.charAt(0).toUpperCase() + winnerColor.slice(1);
+        document.getElementById("result").innerHTML = `${winnerColor} wins!`;
       } else {
         var winner = null;
       }
@@ -154,6 +157,7 @@ class Board extends Component {
     let circles = document.getElementsByClassName("circle");
     circles = Array.from(circles);
     circles.forEach(circle => (circle.style.backgroundColor = "white"));
+    document.getElementById("result").innerHTML = "";
   }
   render() {
     let rowNumbers = [0, 1, 2, 3, 4, 5];
@@ -163,6 +167,7 @@ class Board extends Component {
     return (
       <React.Fragment>
         <div className="board">{rows}</div>
+        <br />
         <div>
           <button onClick={this.reset}>Reset</button>
         </div>

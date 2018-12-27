@@ -13,6 +13,7 @@ class SearchForm extends Component {
 
   handleChange(e) {
     this.setState({ query: e.target.value });
+    this.props.updateAppQuery(e.target.value);
   }
 
   render() {

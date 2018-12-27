@@ -5,15 +5,19 @@ import axios from "axios";
 
 // window.React = React;
 
-class CommentList extends Component {
+class EventList extends Component {
   render() {
-    let commentNodes = this.props.data.map(function(comment, index) {
-      return <div key={index}>{comment.comment}</div>;
+    let eventNodes = this.props.events.map(function(event, index) {
+      return (
+        <div key={index}>
+          {event.date}: {event.description}
+        </div>
+      );
     });
 
     return (
-      <div id="project-comments" className="commentList">
-        <ul>{commentNodes}</ul>
+      <div id="project-events" className="eventList">
+        <ul>{eventNodes}</ul>
       </div>
     );
   }
@@ -24,13 +28,29 @@ class Results extends Component {
     super(props);
 
     this.state = {
-      data: [],
-      offset: 0
+      events: [],
+      offset: 0,
+      page: 1
     };
+    this.loadEventsFromServer = this.loadEventsFromServer.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
 
-  loadCommentsFromServer() {
-    axios.get()
+  loadEventsFromServer() {
+    axios
+      .get("/events", {
+        params: {
+          q: this.props.query,
+          _page: this.state.page
+        }
+      })
+      .then(response => {
+        console.log(response);
+        this.setState({
+          events: response.data
+        });
+      })
+      .catch(err => console.log(err));
     // $.ajax({
     //   url: this.props.url,
     //   data: { limit: this.props.perPage, offset: this.state.offset },
@@ -51,22 +71,27 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    this.loadCommentsFromServer();
+    this.loadEventsFromServer();
   }
 
-  handlePageClick = data => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected * this.props.perPage);
+  handlePageClick(data) {
+    // debugger;
+    let selected = data.selected + 1;
+    console.log(`page selected: ${selected}`);
+    // let offset = Math.ceil(selected * this.props.perPage);
 
-    this.setState({ offset: offset }, () => {
-      this.loadCommentsFromServer();
+    // this.setState({ offset: offset }, () => {
+    //   this.loadCommentsFromServer();
+    // });
+    this.setState({ page: selected }, () => {
+      this.loadEventsFromServer();
     });
-  };
+  }
 
   render() {
     return (
-      <div className="commentBox">
-        <CommentList data={this.state.data} />
+      <div className="results" id="results">
+        <EventList events={this.state.events} />
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
@@ -76,7 +101,7 @@ class Results extends Component {
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={this.handlePageClick}
-          containerClassName={"pagination"}
+          containerClassName={"results"}
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
         />

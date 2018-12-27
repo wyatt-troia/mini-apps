@@ -7,8 +7,8 @@ class EventList extends Component {
   render() {
     let eventNodes = this.props.events.map(function(event, index) {
       return (
-        <div key={index}>
-          {event.date}: {event.description}
+        <div className="mb-2" key={index}>
+          <b>{event.date}:</b> {event.description}
         </div>
       );
     });
@@ -30,38 +30,12 @@ class Results extends Component {
       offset: 0,
       page: 1
     };
-    this.loadEventsFromServer = this.loadEventsFromServer.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
   }
-
-  loadEventsFromServer() {
-    axios
-      .get("/events", {
-        params: {
-          q: this.props.query,
-          _page: this.state.page
-        }
-      })
-      .then(response => {
-        console.log(response);
-        this.setState({
-          events: response.data
-        });
-      })
-      .catch(err => console.log(err));
-  }
-
-  // componentDidMount() {
-  //   this.loadEventsFromServer();
-  // }
 
   handlePageClick(data) {
     let selected = data.selected + 1;
     console.log(`page selected: ${selected}`);
-
-    // this.setState({ page: selected }, () => {
-    //   this.loadEventsFromServer();
-    // });
     this.props.updatePage(selected);
   }
 

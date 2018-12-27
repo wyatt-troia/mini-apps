@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       query: "",
       events: [],
-      page: 1
+      page: 1,
+      pageCount: 10
     };
     this.updateAppQuery = this.updateAppQuery.bind(this);
     this.handleFormSubmission = this.handleFormSubmission.bind(this);
@@ -31,17 +32,26 @@ class App extends Component {
   }
 
   loadEventsFromServer() {
-    axios
-      .get("/events", {
+    Promise.all([
+      axios.get("/events", {
         params: {
           q: this.state.query,
           _page: this.state.page
         }
+      }),
+      axios.get("/events", {
+        params: {
+          q: this.state.query
+        }
       })
+    ])
       .then(response => {
-        console.log(response);
+        console.log(response[0]);
+        console.log(response[1]);
+        let pageCount = Math.ceil(response[1].data.length / 10);
         this.setState({
-          events: response.data
+          events: response[0].data,
+          pageCount
         });
       })
       .catch(err => console.log(err));
@@ -69,7 +79,13 @@ class App extends Component {
         </Row>
         <Row>
           <Col md={12}>
-            <Results events={this.state.events} updatePage={this.updatePage} />
+            {this.state.events.length > 0 && (
+              <Results
+                events={this.state.events}
+                updatePage={this.updatePage}
+                pageCount={this.state.pageCount}
+              />
+            )}
           </Col>
         </Row>
       </Container>

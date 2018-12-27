@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 
-// window.React = React;
-
 class EventList extends Component {
   render() {
     let eventNodes = this.props.events.map(function(event, index) {
@@ -51,47 +49,26 @@ class Results extends Component {
         });
       })
       .catch(err => console.log(err));
-    // $.ajax({
-    //   url: this.props.url,
-    //   data: { limit: this.props.perPage, offset: this.state.offset },
-    //   dataType: "json",
-    //   type: "GET",
-
-    //   success: data => {
-    //     this.setState({
-    //       data: data.comments,
-    //       pageCount: Math.ceil(data.meta.total_count / data.meta.limit)
-    //     });
-    //   },
-
-    //   error: (xhr, status, err) => {
-    //     console.error(this.props.url, status, err.toString());
-    //   }
-    // });
   }
 
-  componentDidMount() {
-    this.loadEventsFromServer();
-  }
+  // componentDidMount() {
+  //   this.loadEventsFromServer();
+  // }
 
   handlePageClick(data) {
-    // debugger;
     let selected = data.selected + 1;
     console.log(`page selected: ${selected}`);
-    // let offset = Math.ceil(selected * this.props.perPage);
 
-    // this.setState({ offset: offset }, () => {
-    //   this.loadCommentsFromServer();
+    // this.setState({ page: selected }, () => {
+    //   this.loadEventsFromServer();
     // });
-    this.setState({ page: selected }, () => {
-      this.loadEventsFromServer();
-    });
+    this.props.updatePage(selected);
   }
 
   render() {
     return (
-      <div className="results" id="results">
-        <EventList events={this.state.events} />
+      <div className="results mt-4" id="results">
+        <EventList events={this.props.events} />
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
@@ -111,8 +88,3 @@ class Results extends Component {
 }
 
 export default Results;
-
-// ReactDOM.render(
-//   <App url={"http://localhost:3000/comments"} author={"adele"} perPage={10} />,
-//   document.getElementById("react-paginate")
-// );

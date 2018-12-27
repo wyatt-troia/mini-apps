@@ -18,7 +18,7 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.props.submitHandler}>
         <Form.Group controlId="formSearchTerm">
           <Form.Label>Search for:</Form.Label>
           <Form.Control

@@ -5,7 +5,14 @@ import { Form, Button } from "react-bootstrap";
 class SearchForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      query: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ query: e.target.value });
   }
 
   render() {
@@ -13,7 +20,11 @@ class SearchForm extends Component {
       <Form>
         <Form.Group controlId="formSearchTerm">
           <Form.Label>Search for:</Form.Label>
-          <Form.Control type="text" placeholder="Enter search term" />
+          <Form.Control
+            type="text"
+            placeholder="Enter search term"
+            onChange={this.handleChange}
+          />
         </Form.Group>
         <Button variant="primary" type="submit">
           Search

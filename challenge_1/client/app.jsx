@@ -46,8 +46,6 @@ class App extends Component {
       })
     ])
       .then(response => {
-        console.log(response[0]);
-        console.log(response[1]);
         let pageCount = Math.ceil(response[1].data.length / 10);
         this.setState({
           events: response[0].data,

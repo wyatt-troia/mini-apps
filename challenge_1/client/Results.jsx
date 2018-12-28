@@ -35,7 +35,6 @@ class Results extends Component {
 
   handlePageClick(data) {
     let selected = data.selected + 1;
-    console.log(`page selected: ${selected}`);
     this.props.updatePage(selected);
   }
 

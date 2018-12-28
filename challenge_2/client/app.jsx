@@ -3,22 +3,33 @@ import ReactDOM from "react-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import MyChart from "./Chart.jsx";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import moment from "../node_modules/moment/src/moment";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController
+} from "react-dates";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bpi: [],
-      dates: []
+      startDate: moment("2018-01-01"),
+      endDate: moment("2018-12-27"),
+      focusedInput: ""
     };
+    this.fetchData = this.fetchData.bind(this);
   }
-  componentDidMount() {
-    console.log("App component mounted");
+  fetchData() {
+    console.log(this.state.startDate.format("YYYY-MM-DD"));
     axios
       .get("https://api.coindesk.com/v1/bpi/historical/close.json", {
         params: {
-          start: "2018-01-01",
-          end: "2018-12-27"
+          start: this.state.startDate.format("YYYY-MM-DD"),
+          end: this.state.endDate.format("YYYY-MM-DD")
         }
       })
       .then(response => {
@@ -31,12 +42,36 @@ class App extends Component {
         });
       });
   }
+  componentDidMount() {
+    this.fetchData();
+  }
+
   render() {
     return (
       <Container className="mt-5">
         <Row>
           <Col>
-            <h1>Bitcoin Value</h1>
+            <h1 className="text-center">Bitcoin Value</h1>
+            <div
+              id="date-picker"
+              className="d-flex justify-content-center mt-3 mb-2"
+            >
+              <DateRangePicker
+                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                onDatesChange={({ startDate, endDate }) =>
+                  this.setState({ startDate, endDate }, this.fetchData)
+                } // PropTypes.func.isRequired,
+                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                isOutsideRange={day =>
+                  day.isBefore("2013-09-30") ||
+                  day.isAfter(moment().subtract(1, "days"))
+                }
+              />
+            </div>
             <MyChart bpi={this.state.bpi} dates={this.state.dates} />
           </Col>
         </Row>

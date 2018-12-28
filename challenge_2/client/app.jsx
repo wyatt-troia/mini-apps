@@ -7,7 +7,10 @@ import MyChart from "./Chart.jsx";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      bpi: [],
+      dates: []
+    };
   }
   componentDidMount() {
     console.log("App component mounted");
@@ -20,6 +23,12 @@ class App extends Component {
       })
       .then(response => {
         console.log(response.data);
+        let bpi = Object.values(response.data.bpi);
+        let dates = Object.keys(response.data.bpi);
+        this.setState({
+          bpi,
+          dates
+        });
       });
   }
   render() {
@@ -28,7 +37,7 @@ class App extends Component {
         <Row>
           <Col>
             <h1>Bitcoin Value</h1>
-            <MyChart />
+            <MyChart bpi={this.state.bpi} dates={this.state.dates} />
           </Col>
         </Row>
       </Container>

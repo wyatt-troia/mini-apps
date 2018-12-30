@@ -45,7 +45,6 @@ class myChart extends Component {
       });
       this.setState({ myChart, chartRefreshed: true });
     }
-    // debugger;
     if (
       prevProps.dates &&
       (prevProps.dates[0] !== this.props.dates[0] ||

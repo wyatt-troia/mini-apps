@@ -76,6 +76,10 @@ class App extends Component {
               />
             </div>
             <MyChart bpi={this.state.bpi} dates={this.state.dates} />
+            <p className="text-muted text-center">
+              Powered By{" "}
+              <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
+            </p>
           </Col>
         </Row>
       </Container>

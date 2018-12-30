@@ -24,23 +24,25 @@ class App extends Component {
     this.fetchData = this.fetchData.bind(this);
   }
   fetchData() {
-    console.log(this.state.startDate.format("YYYY-MM-DD"));
-    axios
-      .get("https://api.coindesk.com/v1/bpi/historical/close.json", {
-        params: {
-          start: this.state.startDate.format("YYYY-MM-DD"),
-          end: this.state.endDate.format("YYYY-MM-DD")
-        }
-      })
-      .then(response => {
-        console.log(response.data);
-        let bpi = Object.values(response.data.bpi);
-        let dates = Object.keys(response.data.bpi);
-        this.setState({
-          bpi,
-          dates
+    if (this.state.startDate.isBefore(this.state.endDate)) {
+      console.log(this.state.startDate.format("YYYY-MM-DD"));
+      axios
+        .get("https://api.coindesk.com/v1/bpi/historical/close.json", {
+          params: {
+            start: this.state.startDate.format("YYYY-MM-DD"),
+            end: this.state.endDate.format("YYYY-MM-DD")
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          let bpi = Object.values(response.data.bpi);
+          let dates = Object.keys(response.data.bpi);
+          this.setState({
+            bpi,
+            dates
+          });
         });
-      });
+    }
   }
   componentDidMount() {
     this.fetchData();
@@ -61,9 +63,10 @@ class App extends Component {
                 startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                 endDate={this.state.endDate} // momentPropTypes.momentObj or null,
                 endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                onDatesChange={({ startDate, endDate }) =>
-                  this.setState({ startDate, endDate }, this.fetchData)
-                } // PropTypes.func.isRequired,
+                onDatesChange={({ startDate, endDate }) => {
+                  console.log(`start: ${startDate} end ${endDate}`);
+                  this.setState({ startDate, endDate }, this.fetchData);
+                }} // PropTypes.func.isRequired,
                 focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                 isOutsideRange={day =>

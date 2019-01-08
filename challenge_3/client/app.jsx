@@ -9,12 +9,16 @@ class App extends Component {
     this.state = {};
   }
 
+  handleClick(number) {
+    console.log(`${number} clicked`);
+  }
+
   render() {
     return (
       <Container>
         <Row>
           <Col>
-            <Keypad />
+            <Keypad handleClick={this.handleClick} />
           </Col>
         </Row>
       </Container>

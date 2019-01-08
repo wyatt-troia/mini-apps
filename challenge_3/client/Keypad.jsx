@@ -12,7 +12,7 @@ const Keypad = props => {
             {row.map((number, idx) => {
               return (
                 <Col className="p-0" key={idx}>
-                  <Key number={number} />
+                  <Key handleClick={props.handleClick} number={number} />
                 </Col>
               );
             })}

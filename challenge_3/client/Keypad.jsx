@@ -5,13 +5,13 @@ import Key from "./Key.jsx";
 
 const Keypad = props => {
   return (
-    <Container id="keypad">
-      {[[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].map(row => {
+    <Container id="keypad" className="border rounded p-4">
+      {[[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].map((row, idx) => {
         return (
-          <Row>
-            {row.map(number => {
+          <Row key={idx}>
+            {row.map((number, idx) => {
               return (
-                <Col>
+                <Col className="p-0" key={idx}>
                   <Key number={number} />
                 </Col>
               );

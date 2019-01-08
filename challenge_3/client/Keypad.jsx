@@ -6,6 +6,9 @@ import Key from "./Key.jsx";
 const Keypad = props => {
   return (
     <Container id="keypad" className="border rounded p-4">
+      <Row className="justify-content-center">
+        <h3># of Pins To Hit</h3>
+      </Row>
       {[[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].map((row, idx) => {
         return (
           <Row key={idx}>

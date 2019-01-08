@@ -16,8 +16,8 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Row>
-          <Col>
+        <Row className="justify-content-center">
+          <Col xs={5}>
             <Keypad handleClick={this.handleClick} />
           </Col>
         </Row>

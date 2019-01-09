@@ -5,7 +5,7 @@ import Key from "./Key.jsx";
 
 const Keypad = props => {
   return (
-    <Container id="keypad" className="border rounded p-4">
+    <Container id="keypad" className="border rounded p-4 mb-5 mt-4">
       <Row className="justify-content-center">
         <h3># of Pins To Hit</h3>
       </Row>

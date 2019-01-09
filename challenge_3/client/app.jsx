@@ -83,7 +83,9 @@ class App extends Component {
         pinsHit: newPinsHit,
         ball: state.ball + 1,
         pinsLeftInFrame:
-          state.frame === 9 && state.ball === 2 ? 10 : state.pinsLeftInFrame,
+          state.frame === 9 && state.ball === 2
+            ? 10
+            : state.pinsLeftInFrame - pinsHit,
         flatPinsHit,
         score: newScore
       }));

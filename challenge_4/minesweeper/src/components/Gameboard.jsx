@@ -1,7 +1,7 @@
 import React from "react";
 import Row from "./Row.jsx";
 
-const Gameboard = ({ tiles, onClick, result }) => {
+const Gameboard = ({ tiles, onClick, result, resetGame }) => {
   let tileRows = tiles.map((tileRow, idx) => (
     <Row tileRow={tileRow} key={idx} row={idx} onClick={onClick} result={result}/>
   ));
@@ -14,6 +14,7 @@ const Gameboard = ({ tiles, onClick, result }) => {
       <h1 className="mt-3">Minesweeper</h1>
       <table className="Gameboard mb-3 mt-4">{tileRows}</table>
       {result ? <h3 id="result">{resultMessage}</h3> : false}
+      <button onClick={() => resetGame()}>Reset</button>
     </React.Fragment>
   );
 };

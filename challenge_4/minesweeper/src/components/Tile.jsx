@@ -1,9 +1,9 @@
 import React from "react";
 
-const Tile = ({ tile, onClick }) => {
+const Tile = ({ tile, onClick, result }) => {
   let adjacentMineCount =
     tile.adjacentMineCount > 0 ? tile.adjacentMineCount : "";
-  if (!tile.clicked) {
+  if (!tile.clicked && result === "") {
     return (
       <td
         onClick={onClick}
@@ -17,7 +17,11 @@ const Tile = ({ tile, onClick }) => {
       <td
         style={{
           fontWeight: tile.adjacentMineCount > 0 ? "bold" : "normal",
-          backgroundColor: tile.containsMine ? "#ff1a1a" : "#AF7E4D"
+          backgroundColor: tile.containsMine
+            ? "#FA5757"
+            : result === "win"
+            ? "#12A3E1"
+            : "#AF7E4D"
         }}
       >
         {tile.containsMine ? "X" : adjacentMineCount}

@@ -3,3 +3,7 @@ export const clickTile = (row, col) => ({
   row,
   col
 });
+
+export const resetGame = () => ({
+  type: "RESET_GAME"
+});

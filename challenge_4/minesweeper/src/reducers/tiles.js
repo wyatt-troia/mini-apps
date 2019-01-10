@@ -71,12 +71,9 @@ for (let row = 0; row < rowCount; row++) {
   }
 }
 
-console.log(initialTiles);
+let initialState = { result: "", tilesClicked: 0, tiles: initialTiles };
 
-export const reducer = (
-  state = { result: "", tilesClicked: 0, tiles: initialTiles },
-  action
-) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "CLICK_TILE":
       // make copy of tiles object to avoid mutating current state
@@ -142,12 +139,14 @@ export const reducer = (
       } else if (clickedTile.containsMine) {
         newResult = "loss";
       }
-      
+
       return {
         result: newResult,
         tilesClicked: newTilesClicked,
         tiles: newTiles
       };
+    case "RESET_GAME":
+      return initialState;
     default:
       return state;
   }

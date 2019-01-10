@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { clickTile } from "../actions/index.js";
+import { clickTile, resetGame } from "../actions/index.js";
 import Gameboard from "../components/Gameboard.jsx";
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: (row, col) => {
       dispatch(clickTile(row, col));
+    },
+    resetGame: () => {
+      dispatch(resetGame());
     }
   };
 };

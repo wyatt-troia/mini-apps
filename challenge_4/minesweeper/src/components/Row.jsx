@@ -8,6 +8,7 @@ const Row = ({ tileRow, row, onClick, result }) => {
       onClick={() => {
         if (result === "") onClick(row, col);
       }}
+      result={result}
     />
   ));
   return <tr>{tiles}</tr>;

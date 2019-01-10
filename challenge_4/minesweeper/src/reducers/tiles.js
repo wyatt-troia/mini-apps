@@ -88,7 +88,6 @@ export const reducer = (state = initialState, action) => {
 
       // recursively click clicked tile and all adjacent tiles until hitting wall or tile adjacent to a mine
       (function contagiousClick(row, col) {
-        // debugger;
         // if coordinate isn't on board or has been clicked, return
         if (
           !newTiles[row] ||

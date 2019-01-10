@@ -145,8 +145,10 @@ export const reducer = (state = initialState, action) => {
         tilesClicked: newTilesClicked,
         tiles: newTiles
       };
+
     case "RESET_GAME":
       return initialState;
+
     default:
       return state;
   }

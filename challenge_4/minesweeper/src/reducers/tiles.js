@@ -79,17 +79,55 @@ export const reducer = (
 ) => {
   switch (action.type) {
     case "CLICK_TILE":
+      // make copy of tiles object to avoid mutating current state
       let newTiles = [];
       state.tiles.forEach(row => {
         let newRow = [];
         row.forEach(tile => newRow.push(Object.assign({}, tile)));
         newTiles.push(newRow);
       });
+
       let clickedTile = newTiles[action.row][action.col];
-      clickedTile.clicked = true;
 
+      // recursively click clicked tile and all adjacent tiles until hitting wall or tile adjacent to a mine
+      (function contagiousClick(row, col) {
+        // debugger;
+        // if coordinate isn't on board or has been clicked, return
+        if (
+          !newTiles[row] ||
+          !newTiles[row][col] ||
+          newTiles[row][col].clicked
+        ) {
+          return;
+        }
+
+        // click new tile
+        let newClickedTile = newTiles[row][col];
+        newClickedTile.clicked = true;
+
+        // if tile has no adjacent mines, attempt to click on adjacent tiles
+        if (newTiles[row][col].adjacentMineCount === 0) {
+          // click on adjacent tiles in previous row
+          for (let nextCol = col - 1; nextCol < col + 2; nextCol++) {
+            if (newTiles[row - 1]) {
+              contagiousClick(row - 1, nextCol);
+            }
+          }
+          // click on adjacent tiles in current row
+          contagiousClick(row, col - 1);
+          contagiousClick(row, col + 1);
+
+          // click on adjacent tiles in next row
+          for (let nextCol = col - 1; nextCol < col + 2; nextCol++) {
+            if (newTiles[row + 1]) {
+              contagiousClick(row + 1, nextCol);
+            }
+          }
+        }
+      })(action.row, action.col);
+
+      // check for win or loss
       let newTilesClicked = state.tilesClicked + 1;
-
       let newResult;
       let totalTileCount = rowCount * rowLength;
       if (newTilesClicked === totalTileCount - mineCount) {

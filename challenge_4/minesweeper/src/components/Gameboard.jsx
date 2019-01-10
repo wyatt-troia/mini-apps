@@ -13,7 +13,7 @@ const Gameboard = ({ tiles, onClick, result, resetGame }) => {
   ));
 
   let resultMessage;
-  if (result === "loss") resultMessage = "You lost";
+  if (result === "loss") resultMessage = "You lost. Try again?";
   if (result === "win") resultMessage = "You win!";
   return (
     <React.Fragment>

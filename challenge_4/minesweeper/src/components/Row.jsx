@@ -1,8 +1,10 @@
 import React from "react";
 import Tile from "./Tile.jsx";
 
-const Row = ({ tileRow, row }) => {
-  let tiles = tileRow.map(tile => <Tile tile={tile} row={row} />);
+const Row = ({ tileRow, row, onClick }) => {
+  let tiles = tileRow.map((tile, col) => (
+    <Tile tile={tile} onClick={() => onClick(row, col)} />
+  ));
   return <tr>{tiles}</tr>;
 };
 

@@ -3,7 +3,7 @@ import Row from "./Row.jsx";
 
 const Gameboard = ({ tiles, onClick, result }) => {
   let tileRows = tiles.map((tileRow, idx) => (
-    <Row tileRow={tileRow} key={idx} row={idx} onClick={onClick} />
+    <Row tileRow={tileRow} key={idx} row={idx} onClick={onClick} result={result}/>
   ));
 
   let resultMessage;

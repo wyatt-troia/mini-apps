@@ -126,16 +126,23 @@ export const reducer = (
         }
       })(action.row, action.col);
 
+      // update click count
+      let newTilesClicked = 0;
+      for (let row = 0; row < rowCount; row++) {
+        for (let col = 0; col < rowLength; col++) {
+          if (newTiles[row][col].clicked) newTilesClicked++;
+        }
+      }
+
       // check for win or loss
-      let newTilesClicked = state.tilesClicked + 1;
-      let newResult;
+      let newResult = "";
       let totalTileCount = rowCount * rowLength;
       if (newTilesClicked === totalTileCount - mineCount) {
         newResult = "win";
       } else if (clickedTile.containsMine) {
         newResult = "loss";
       }
-
+      
       return {
         result: newResult,
         tilesClicked: newTilesClicked,

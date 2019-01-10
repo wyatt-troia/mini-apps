@@ -1,11 +1,17 @@
 import React from "react";
 import Row from "./Row.jsx";
 
-const Gameboard = ({ tiles, onClick }) => {
+const Gameboard = ({ tiles, onClick, result }) => {
   let tileRows = tiles.map((tileRow, idx) => (
     <Row tileRow={tileRow} key={idx} row={idx} onClick={onClick} />
   ));
-  return <table className="Gameboard">{tileRows}</table>;
+  return (
+    <React.Fragment>
+      <h1 className='mt-3'>Minesweeper</h1>
+      <table className="Gameboard mb-3 mt-4">{tileRows}</table>
+      {result ? <h3 id="result">{result}</h3> : false}
+    </React.Fragment>
+  );
 };
 
 export default Gameboard;

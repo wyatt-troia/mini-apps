@@ -4,7 +4,8 @@ import Gameboard from "../components/Gameboard.jsx";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    tiles: state.tiles
+    tiles: state.tiles,
+    result: state.result
   };
 };
 

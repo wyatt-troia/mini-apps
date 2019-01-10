@@ -1,5 +1,10 @@
 .Gameboard {
   border: 1px solid black;
+  margin: auto;
+}
+
+.col {
+  text-align: center;
 }
 
 .Gameboard tr td {

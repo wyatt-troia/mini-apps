@@ -92,10 +92,10 @@ export const reducer = (
 
       let newResult;
       let totalTileCount = rowCount * rowLength;
-      if ((newTilesClicked = totalTileCount - mineCount)) {
+      if (newTilesClicked === totalTileCount - mineCount) {
         newResult = "win";
       } else if (clickedTile.containsMine) {
-        newResult = "lose";
+        newResult = "loss";
       }
 
       return {

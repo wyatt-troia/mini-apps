@@ -2,9 +2,9 @@
 
 A search engine for historical events with paginated results, built using [React](https://reactjs.org/), [react-paginate](https://www.npmjs.com/package/react-paginate), [json-server](https://github.com/typicode/json-server), and [Express](http://expressjs.com/). 
 
-Please note: the app uses a "messy" data set.
-
 ![Demo](https://imgur.com/S7hBM5L.gif)
+
+Please note: the app uses a "messy" data set.
 
 ## Getting Started
 

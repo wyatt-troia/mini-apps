@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       bpi: [],
       startDate: moment("2018-01-01"),
-      endDate: moment("2018-12-27"),
+      endDate: moment().subtract(1, "days"),
       focusedInput: ""
     };
     this.fetchData = this.fetchData.bind(this);
@@ -50,7 +50,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container className="mt-5">
+      <Container className="mt-3">
         <Row>
           <Col>
             <h1 className="text-center">Bitcoin Value</h1>
@@ -70,7 +70,7 @@ class App extends Component {
                 focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                 isOutsideRange={day =>
-                  day.isBefore("2013-09-30") ||
+                  day.isBefore("2010-07-17") ||
                   day.isAfter(moment().subtract(1, "days"))
                 }
               />

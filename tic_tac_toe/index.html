@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1 class="title mb-4 mt-3">Tic-Tac-Toe</h1>
+    <div id="container">
+      <table id="board" border="1">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+
+      <br />
+      <button id="reset">Reset</button> <br /><br />
+      <div id="winCount">
+        <b>Wins:</b> <br />
+        X: 0 <br />
+        O: 0
+      </div>
+      <br />
+      <div id="result_notification"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

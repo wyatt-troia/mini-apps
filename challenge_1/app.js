@@ -1,3 +1,11 @@
+let playerX, playerY;
+while (!playerX) {
+  playerX = prompt("Player X name:");
+}
+while (!playerY) {
+  playerY = prompt("Player Y name:");
+}
+
 var state = {
   activeGame: true,
   upNext: "X",
@@ -11,8 +19,8 @@ var state = {
   board: [["", "", ""], ["", "", ""], ["", "", ""]],
   numTurns: 0,
   playerNames: {
-    X: prompt("Player X name:"),
-    O: prompt("Player O name:")
+    X: playerX,
+    O: playerY
   },
   playerColors: {
     X: "DarkRed",

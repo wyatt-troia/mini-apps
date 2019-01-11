@@ -1,6 +1,10 @@
 #container {
   text-align: center;
   width: 25%;
+  margin: auto;
+}
+.title {
+  text-align: center;
 }
 table {
   border-collapse: collapse;

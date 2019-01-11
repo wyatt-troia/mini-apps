@@ -2,7 +2,7 @@
 
 An interactive chart showing Bitcoin's value over time, built using [ChartJS](https://www.chartjs.org/), [React](https://reactjs.org/) and [Express](http://expressjs.com/). Data is powered by [Coindesk](https://www.coindesk.com/price/bitcoin) and covers 7/17/10 through yesterday.  
 
-![Demo](https://imgur.com/a/d3g0vqO.gif)
+![Demo](https://imgur.com/HTZaYuR.gif)
 
 ## Getting Started
 

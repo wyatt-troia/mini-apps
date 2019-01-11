@@ -27,4 +27,4 @@ Then navigate to [http://localhost:3000](http://localhost:3000).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/wyatt-troia/hrnyc18-mini-apps-2/blob/master/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/wyatt-troia/mini-apps/blob/master/LICENSE.md) file for details

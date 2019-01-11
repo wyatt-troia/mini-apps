@@ -13,7 +13,7 @@ npm run start
 ```
 Then navigate to [http://localhost:3000](http://localhost:3000).
 
-## Authors
+## Author
 
 - **Wyatt Troia** - [Github](https://github.com/wyatt-troia)
 

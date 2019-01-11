@@ -11,6 +11,7 @@ cd minesweeper
 npm install
 npm run build
 ```
+Then navigate to [http://localhost:3000](http://localhost:3000).
 
 ## Authors
 

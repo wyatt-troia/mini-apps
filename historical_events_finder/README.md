@@ -16,7 +16,7 @@ npm run start
 
 Then navigate to [http://localhost:3001](http://localhost:3001).
 
-## Authors
+## Author
 
 - **Wyatt Troia** - [Github](https://github.com/wyatt-troia)
 

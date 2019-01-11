@@ -14,7 +14,7 @@ npm run start-json-server
 npm run start
 ```
 
-Then navigate to [localhost:3000](http://localhost:3001).
+Then navigate to [localhost:3001](http://localhost:3001).
 
 ## Authors
 

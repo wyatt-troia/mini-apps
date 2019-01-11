@@ -104,7 +104,7 @@ class App extends Component {
           ball: this.state.ball + 1,
           pinsLeftInFrame: newPinsLeft === 0 ? 10 : newPinsLeft,
           score: newScore,
-          activeGame: newPinsHit === 0 ? true : false
+          activeGame: newPinsLeft === 0 ? true : false
         }));
       } else {
         this.setState((state, props) => ({
@@ -145,14 +145,17 @@ class App extends Component {
         </Row>
         <Row className="justify-content-center">
           <Col xs={5}>
-            <Keypad handleClick={this.handleClick} />
+            <Keypad
+              handleClick={this.handleClick}
+              activeGame={this.state.activeGame}
+            />
           </Col>
         </Row>
         <Row className="mb-4">
           <Scorecard pinsHit={this.state.pinsHit} score={this.state.score} />
         </Row>
         <Row className="justify-content-center">
-          <button onClick={() => this.reset()}>Reset</button>
+          <button onClick={this.reset}>Reset</button>
         </Row>
       </Container>
     );

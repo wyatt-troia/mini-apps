@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Key from "./Key.jsx";
 
-const Keypad = props => {
+const Keypad = ({ handleClick, activeGame }) => {
   return (
     <Container id="keypad" className="border rounded p-4 mb-5 mt-4">
       <Row className="justify-content-center">
@@ -15,7 +15,11 @@ const Keypad = props => {
             {row.map((number, idx) => {
               return (
                 <Col className="p-0" key={idx}>
-                  <Key handleClick={props.handleClick} number={number} />
+                  <Key
+                    handleClick={handleClick}
+                    number={number}
+                    activeGame={activeGame}
+                  />
                 </Col>
               );
             })}

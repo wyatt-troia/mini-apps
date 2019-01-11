@@ -2,7 +2,7 @@
 
 A collection of mini-apps built with a focus on function over style.
 
-## Historical Events Finder
+## [Historical Events Finder](http://expressjs.com/)
 
 A search engine for historical events with paginated results, built using [React](https://reactjs.org/), [react-paginate](https://www.npmjs.com/package/react-paginate), [json-server](https://github.com/typicode/json-server), and [Express](http://expressjs.com/). 
 

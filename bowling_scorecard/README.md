@@ -1,6 +1,6 @@
-# Bowling Scoresheet
+# Bowling Scorecard
 
-A tool that fills out a bowling scoresheet, built using [React](https://reactjs.org/) and [Express](http://expressjs.com/). Uses [ten-pin bowling](https://en.wikipedia.org/wiki/Ten-pin_bowling) rules
+A tool that fills out a bowling scorecard, built using [React](https://reactjs.org/) and [Express](http://expressjs.com/). Uses [ten-pin bowling](https://en.wikipedia.org/wiki/Ten-pin_bowling) rules
 
 ![Demo](https://imgur.com/nQy3A8m.gif)
 

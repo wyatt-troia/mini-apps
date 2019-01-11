@@ -2,14 +2,8 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const path = require("path");
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
 const fs = require("fs");
 var Busboy = require("busboy");
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-app.use(morgan("dev"));
 
 app.use(express.static(path.join(__dirname, "/client")));
 

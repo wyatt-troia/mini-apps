@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>JSON-to-CSV</title>
+  </head>
+  <body>
+    <h1>Convert JSON to CSV</h1>
+    <!--
+      <form action="/JSON-to-CSV" method="post" enctype="multipart/form-data">
+        <b><label for="JSON">JSON:</label></b> <br />
+        <input type="file" id="JSON" name="JSON" accept=".json" /> <br />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    -->
+
+    <form enctype="multipart/form-data">
+      <b><label for="file">JSON:</label></b> <br /><br />
+      <input name="file" type="file" accept=".json" />
+      <input type="button" value="Upload" />
+    </form>
+    <progress></progress> <br /><br />
+    <div id="CSV">
+      <div id="CSV_header"><b>CSV:</b></div>
+      <br />
+      <div id="CSV_result"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -11,6 +11,7 @@ npm install
 npm run build
 npm run start
 ```
+Then navigate to [http://localhost:3000](http://localhost:3000).
 
 ## Authors
 

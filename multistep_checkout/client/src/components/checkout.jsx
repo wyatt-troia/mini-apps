@@ -68,7 +68,11 @@ class Checkout extends React.Component {
           <Route
             path="/review"
             render={props => (
-              <Review {...props} purchase_id={this.state.purchase_id} />
+              <Review
+                {...props}
+                purchase_id={this.state.purchase_id}
+                updatePurchaseId={this.updatePurchaseId}
+              />
             )}
           />
         </div>

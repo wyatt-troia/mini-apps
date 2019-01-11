@@ -54,8 +54,13 @@ class Review extends React.Component {
         <p>Billing Zip Code: {this.state.billing_zip}</p>
 
         <div>
+          <Link to="/F3">
+            <button>Back</button>
+          </Link>
           <Link to="/">
-            <button>Purchase</button>
+            <button onClick={() => this.props.updatePurchaseId(null)}>
+              Purchase
+            </button>
           </Link>
         </div>
       </div>

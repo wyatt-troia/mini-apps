@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db-init": "mysql -u root -p < initDB.sql",
-    "start": "node server.js",
-    "server-dev": "nodemon server.js",
+    "start": "nodemon server.js",
     "build": "npx babel --watch client/src --out-dir client/dist"
   },
   "keywords": [],

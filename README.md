@@ -1,4 +1,4 @@
-# Mini-Apps 2
+# Mini-Apps
 
 A collection of mini-apps built with a focus on function over style.
 

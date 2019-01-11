@@ -4,22 +4,34 @@ import { Container, Row, Col } from "react-bootstrap";
 import Keypad from "./Keypad.jsx";
 import Scorecard from "./Scorecard.jsx";
 
+const generateInitialState = () => {
+  let pinsHit = [];
+  for (let i = 0; i < 10; i++) {
+    pinsHit.push([]);
+  }
+  return {
+    frame: 0,
+    ball: 0,
+    pinsLeftInFrame: 10,
+    pinsHit,
+    flatPinsHit: [],
+    score: [],
+    activeGame: true
+  };
+};
+
+let initialState = generateInitialState();
+
 class App extends Component {
   constructor(props) {
     super(props);
-    let pinsHit = [];
-    for (let i = 0; i < 10; i++) {
-      pinsHit.push([]);
-    }
-    this.state = {
-      frame: 0,
-      ball: 0,
-      pinsLeftInFrame: 10,
-      pinsHit,
-      flatPinsHit: [],
-      score: []
-    };
+    this.state = initialState;
     this.handleClick = this.handleClick.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState(initialState);
   }
 
   handleClick(pinsHit) {
@@ -75,10 +87,36 @@ class App extends Component {
       newScore[frame] = previousScore + score;
     }
 
-    if (
-      (this.state.ball === 0 && pinsLeftInFrame > 0) ||
-      this.state.frame === 9
-    ) {
+    let newPinsLeft = this.state.pinsLeftInFrame - pinsHit;
+    if (this.state.frame === 9) {
+      if (this.state.ball === 0) {
+        this.setState((state, props) => ({
+          pinsHit: newPinsHit,
+          frame: state.frame,
+          ball: this.state.ball + 1,
+          pinsLeftInFrame: newPinsLeft === 0 ? 10 : newPinsLeft,
+          score: newScore
+        }));
+      } else if (this.state.ball === 1) {
+        this.setState((state, props) => ({
+          pinsHit: newPinsHit,
+          frame: state.frame,
+          ball: this.state.ball + 1,
+          pinsLeftInFrame: newPinsLeft === 0 ? 10 : newPinsLeft,
+          score: newScore,
+          activeGame: newPinsHit === 0 ? true : false
+        }));
+      } else {
+        this.setState((state, props) => ({
+          pinsHit: newPinsHit,
+          frame: state.frame,
+          ball: this.state.ball + 1,
+          pinsLeftInFrame: newPinsLeft === 0 ? 10 : newPinsLeft,
+          score: newScore,
+          activeGame: false
+        }));
+      }
+    } else if (this.state.ball === 0 && pinsLeftInFrame > 0) {
       this.setState((state, props) => ({
         pinsHit: newPinsHit,
         ball: state.ball + 1,
@@ -86,7 +124,6 @@ class App extends Component {
           state.frame === 9 && state.ball === 2
             ? 10
             : state.pinsLeftInFrame - pinsHit,
-        flatPinsHit,
         score: newScore
       }));
     } else {
@@ -95,7 +132,6 @@ class App extends Component {
         frame: state.frame + 1,
         ball: 0,
         pinsLeftInFrame: 10,
-        flatPinsHit,
         score: newScore
       }));
     }
@@ -105,15 +141,18 @@ class App extends Component {
     return (
       <Container>
         <Row className="justify-content-center mt-3">
-          <h1>Bowling</h1>
+          <h1>Bowling Scoresheet</h1>
         </Row>
         <Row className="justify-content-center">
           <Col xs={5}>
             <Keypad handleClick={this.handleClick} />
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-4">
           <Scorecard pinsHit={this.state.pinsHit} score={this.state.score} />
+        </Row>
+        <Row className="justify-content-center">
+          <button onClick={() => this.reset()}>Reset</button>
         </Row>
       </Container>
     );

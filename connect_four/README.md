@@ -4,6 +4,8 @@ A two-person version of the classic game, built using [React](https://reactjs.or
 
 ![Demo](https://imgur.com/DtDcsGl.gif)
 
+#### [Deployment](http://ec2-54-174-123-146.compute-1.amazonaws.com:3003/)
+
 ## Getting Started
 
 ```

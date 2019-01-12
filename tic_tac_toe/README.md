@@ -10,7 +10,7 @@ A two-person tic-tac-toe game with win tally, built using vanilla Javascript and
 npm install
 npm run start
 ```
-Then navigate to [http://localhost:3000](http://localhost:3000).
+Then navigate to [http://localhost:3008](http://localhost:3008).
 
 ## Author
 

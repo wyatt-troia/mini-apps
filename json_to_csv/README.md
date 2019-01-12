@@ -10,7 +10,7 @@ A tool to convert JSON files to CSV, built using [Busboy](https://github.com/msc
 npm install
 npm run start
 ```
-Then navigate to [http://localhost:3000](http://localhost:3000).
+Then navigate to [http://localhost:3005](http://localhost:3005).
 
 ## Author
 

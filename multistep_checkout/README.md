@@ -12,7 +12,7 @@ npm run db-init
 npm run build
 npm run start
 ```
-Then navigate to [http://localhost:3000](http://localhost:3000).
+Then navigate to [http://localhost:3007](http://localhost:3007).
 
 ## Author
 

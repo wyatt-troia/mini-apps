@@ -4,6 +4,8 @@ A tool to convert JSON files to CSV, built using [Busboy](https://github.com/msc
 
 ![Demo](https://imgur.com/yVM2CP1.gif)
 
+![Demo](https://imgur.com/yVM2CP1.gif)
+
 ## Getting Started
 
 ```

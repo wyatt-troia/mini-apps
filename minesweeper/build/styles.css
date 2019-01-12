@@ -1,0 +1,15 @@
+.Gameboard {
+  border: 1px solid black;
+  margin: auto;
+}
+
+.col {
+  text-align: center;
+}
+
+.Gameboard tr td {
+  border: 1px solid black;
+  height: 2.5rem;
+  width: 2.5rem;
+  text-align: center;
+}

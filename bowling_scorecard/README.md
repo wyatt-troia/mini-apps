@@ -4,6 +4,8 @@ A tool that fills out a bowling scorecard, built using [React](https://reactjs.o
 
 ![Demo](https://imgur.com/nQy3A8m.gif)
 
+#### [Deployment](http://ec2-54-174-123-146.compute-1.amazonaws.com:3002/)
+
 ## Getting Started
 
 ```

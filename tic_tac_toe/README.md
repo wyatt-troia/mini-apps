@@ -4,6 +4,8 @@ A two-person tic-tac-toe game with win tally, built using vanilla Javascript and
 
 ![Demo](https://imgur.com/1C1nFuI.gif)
 
+#### [Deployment](http://ec2-54-174-123-146.compute-1.amazonaws.com:3008/)
+
 ## Getting Started
 
 ```

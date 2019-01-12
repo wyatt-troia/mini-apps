@@ -17,7 +17,7 @@ app.get("/events", (req, res) => {
     params = { q };
   }
   axios
-    .get("http://localhost:3000/events", {
+    .get("http://localhost:3009/events", {
       params
     })
     .then(response => res.send(response.data));

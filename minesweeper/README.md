@@ -4,6 +4,8 @@ A version of the classic Minesweeper game built using [React](https://reactjs.or
 
 ![Demo](https://imgur.com/y6FGSST.gif)
 
+#### [Deployment](http://ec2-54-174-123-146.compute-1.amazonaws.com:3006/)
+
 ## Getting Started
 
 ```

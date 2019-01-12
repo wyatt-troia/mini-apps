@@ -14,14 +14,38 @@ A tool that fills out a bowling scorecard, built using [React](https://reactjs.o
 
 ![Demo](https://imgur.com/nQy3A8m.gif)
 
+## [Connect Four](https://github.com/wyatt-troia/mini-apps/tree/master/connect_four)
+
+A two-person version of the classic game, built using [React](https://reactjs.org/) and [Express](http://expressjs.com/). Connect four pieces of the same color in a vertical, horizontal, or diagonal line to win! To drop a piece, click anywhere in a row.
+
+![Demo](https://imgur.com/DtDcsGl.gif)
+
 ## [Historical Events Finder](https://github.com/wyatt-troia/mini-apps/tree/master/historical_events_finder)
 
 A search engine for historical events with paginated results, built using [React](https://reactjs.org/), [react-paginate](https://www.npmjs.com/package/react-paginate), [json-server](https://github.com/typicode/json-server), and [Express](http://expressjs.com/). 
 
 ![Demo](https://imgur.com/S7hBM5L.gif)
 
+## [JSON-to-CSV Converter](https://github.com/wyatt-troia/mini-apps/tree/master/json_to_csv)
+
+A tool to convert JSON files to CSV, built using [Busboy](https://github.com/mscdex/busboy) and [Express](http://expressjs.com/). 
+
+![Demo](https://imgur.com/yVM2CP1.gif)
+
 ## [Minesweeper](https://github.com/wyatt-troia/mini-apps/tree/master/minesweeper)
 
 A version of the classic Minesweeper game built using [React](https://reactjs.org/) and [Redux](https://redux.js.org/).
 
 ![Demo](https://imgur.com/y6FGSST.gif)
+
+## [Multistep Checkout](https://github.com/wyatt-troia/mini-apps/tree/master/multistep_checkout)
+
+A multistep checkout app with input validation and persistent data, built using [React](https://reactjs.org/), [react-router](https://github.com/ReactTraining/react-router), [mySQL](https://www.mysql.com/), [Knex](https://knexjs.org/#Schema-createTable), and [Express](http://expressjs.com/). 
+
+![Demo](https://imgur.com/vVNhFYc.gif)
+
+## [Tic-Tac-Toe](https://github.com/wyatt-troia/mini-apps/tree/master/tic_tac_toe)
+
+A two-person tic-tac-toe game with win tally, built using vanilla Javascript and [Express](http://expressjs.com/).
+
+![Demo](https://imgur.com/1C1nFuI.gif)

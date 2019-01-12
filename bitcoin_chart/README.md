@@ -4,6 +4,8 @@ An interactive chart showing Bitcoin's value over time, built using [ChartJS](ht
 
 ![Demo](https://imgur.com/HTZaYuR.gif)
 
+#### [Deployment](http://ec2-54-174-123-146.compute-1.amazonaws.com:3001/)
+
 ## Getting Started
 
 ```

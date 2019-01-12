@@ -10,6 +10,7 @@ Please note: the app uses a "messy" data set.
 
 ```
 npm install
+npm install -g json-server
 npm run start-json-server
 npm run start
 ```

@@ -4,6 +4,8 @@ A search engine for historical events with paginated results, built using [React
 
 ![Demo](https://imgur.com/S7hBM5L.gif)
 
+#### [Deployment](http://ec2-54-174-123-146.compute-1.amazonaws.com:3009/)
+
 Please note: the app uses a "messy" data set.
 
 ## Getting Started
